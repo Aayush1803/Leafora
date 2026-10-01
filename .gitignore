@@ -33,3 +33,4 @@ Thumbs.db
 # ── Test artefacts ────────────────────────────────────────────────────────────
 test_output/
 *.log
+test_leaf.jpg
