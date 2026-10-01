@@ -1,16 +1,6 @@
---index-url https://download.pytorch.org/whl/cpu
-
-# FastAPI + ASGI server
 fastapi==0.115.5
 uvicorn[standard]==0.32.1
-
-# PyTorch (CPU-only build — smaller image, Render-compatible)
-# Pin to a stable release; swap the index URL for GPU builds if needed.
 torch==2.4.1
 torchvision==0.19.1
-
-# Image processing
 Pillow==10.4.0
-
-# Python-multipart is required by FastAPI for file uploads
 python-multipart==0.0.12
