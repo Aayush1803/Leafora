@@ -1,10 +1,10 @@
---extra-index-url https://download.pytorch.org/whl/cpu
+--index-url https://download.pytorch.org/whl/cpu
 
 # FastAPI + ASGI server
 fastapi==0.115.5
 uvicorn[standard]==0.32.1
 
-# PyTorch (CPU-only build — smaller image, Railway-compatible)
+# PyTorch (CPU-only build — smaller image, Render-compatible)
 # Pin to a stable release; swap the index URL for GPU builds if needed.
 torch==2.4.1
 torchvision==0.19.1
