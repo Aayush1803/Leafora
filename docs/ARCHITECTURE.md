@@ -4,7 +4,7 @@
 **Date:** October 2026  
 **Status:** Approved & Implemented  
 **Core Frameworks:** Next.js 16 (React 19, TypeScript), FastAPI (Python 3.11+), PyTorch (CPU)  
-**Hosting Platforms:** Vercel (Client Edge), Render (ASGI Microservice)  
+**Hosting Platforms:** Vercel (Client Edge: `https://veyra-lilac-three.vercel.app`), Render (ASGI Microservice: `https://vriksh.onrender.com`)  
 
 ---
 
@@ -221,7 +221,7 @@ flowchart LR
 
     subgraph VercelEdge ["Vercel Edge Platform"]
         VercelCDN["Vercel Anycast Edge"]
-        VercelFrontend["Next.js Static & SSR Bundles<br/>(Domain: veyra.vercel.app)"]
+        VercelFrontend["Next.js Static & SSR Bundles<br/>(Domain: veyra-lilac-three.vercel.app)"]
     end
 
     subgraph RenderPlatform ["Render Cloud (Oregon / Frankfurt)"]

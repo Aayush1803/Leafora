@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://veyra.app"
+    process.env.NEXT_PUBLIC_APP_URL || "https://veyra-lilac-three.vercel.app"
   ),
   title: {
     default: "VEYRA — Crop Analysis",

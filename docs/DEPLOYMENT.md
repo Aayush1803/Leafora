@@ -4,6 +4,7 @@
 **Date:** October 2026  
 **Frontend Deployment:** Vercel Global Edge Network  
 **Backend Deployment:** Render Cloud Web Service  
+**Production Frontend URL:** `https://veyra-lilac-three.vercel.app`  
 **Production Backend URL:** `https://vriksh.onrender.com`  
 
 ---
@@ -14,7 +15,7 @@ VEYRA adopts a cloud-native, decoupled architecture separating the client-side p
 
 ```mermaid
 flowchart TD
-    User["End User / Mobile Farmer"] --> |1. HTTPS Request| VercelEdge["Vercel Global Edge Network<br/>(Next.js 16 Web Client)"]
+    User["End User / Mobile Farmer"] --> |1. HTTPS Request| VercelEdge["Vercel Global Edge Network<br/>(https://veyra-lilac-three.vercel.app)"]
     VercelEdge --> |2. Serves Pre-rendered Static Shell| User
     User --> |3. Uploads Leaf Image<br/>(POST /predict)| RenderLB["Render TLS Reverse Proxy<br/>(https://vriksh.onrender.com)"]
     RenderLB --> |4. Forwards Request| Uvicorn["Uvicorn ASGI Container<br/>(Linux Python 3.11)"]
@@ -84,6 +85,7 @@ This pins the build to the lightweight ~180 MB CPU wheel, ensuring fast builds a
 | Key | Production Value | Development Value |
 | :--- | :--- | :--- |
 | `NEXT_PUBLIC_API_URL` | `https://vriksh.onrender.com` | `http://localhost:8000` |
+| `NEXT_PUBLIC_APP_URL` | `https://veyra-lilac-three.vercel.app` | `http://localhost:3000` |
 
 ---
 

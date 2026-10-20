@@ -22,8 +22,9 @@ The modern, responsive web application for **VEYRA (Visual Evaluation & Yield Ri
 * **Language:** TypeScript 5.x
 * **Styling:** Tailwind CSS 3.4
 * **Animations:** Framer Motion
-* **Icons:** Lucide React
 * **Deployment Target:** Vercel Global Edge Network
+* **Live Web Application:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)
+* **Live Backend API (Render):** [https://vriksh.onrender.com](https://vriksh.onrender.com)
 
 ---
 
@@ -93,10 +94,13 @@ veyra/
 ## Deployment (Vercel)
 
 The frontend is deployed to **Vercel** with automatic GitHub integration:
+* **Live Production URL:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)
 * **Root Directory:** `veyra`
 * **Build Command:** `npm run build`
 * **Output Directory:** `.next`
-* **Environment Variable:** `NEXT_PUBLIC_API_URL=https://vriksh.onrender.com`
+* **Environment Variables:**
+  * `NEXT_PUBLIC_API_URL=https://vriksh.onrender.com`
+  * `NEXT_PUBLIC_APP_URL=https://veyra-lilac-three.vercel.app`
 
 ---
 

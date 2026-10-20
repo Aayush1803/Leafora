@@ -3,6 +3,8 @@
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
 **Audience:** Developers, Evaluators, Maintainers  
+**Live Web Application:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)  
+**Live Backend API (Render):** [https://vriksh.onrender.com](https://vriksh.onrender.com)  
 
 ---
 

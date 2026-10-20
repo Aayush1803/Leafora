@@ -18,7 +18,7 @@
 | **Input Format** | RGB, $128 \times 128$, ImageNet Normalization |
 | **Backend Framework** | FastAPI (Python 3.11+, PyTorch CPU) |
 | **Frontend Framework** | Next.js 16 (React 19, TypeScript, Tailwind CSS) |
-| **Status** | Production Deployed (Render API + Vercel Client) |
+| **Status** | Production Deployed (Render API: `https://vriksh.onrender.com` • Vercel Client: `https://veyra-lilac-three.vercel.app`) |
 
 ---
 

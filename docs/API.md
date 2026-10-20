@@ -4,6 +4,7 @@
 **Base Protocol:** HTTPS / HTTP/1.1  
 **Default Port (Local):** `8000`  
 **Production Host:** `https://vriksh.onrender.com`  
+**Production Frontend Host:** `https://veyra-lilac-three.vercel.app`  
 **Local Development Host:** `http://localhost:8000`  
 **Framework:** FastAPI 0.115 / Uvicorn 0.32 (ASGI)  
 

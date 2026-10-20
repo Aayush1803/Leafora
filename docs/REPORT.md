@@ -423,7 +423,7 @@ The operational release was validated across all functional tiers:
 | **Frontend Production Build** | `npm run build` (Turbopack / Next.js 16) | **0 Errors, 0 Warnings** | Static pages generated successfully |
 | **TypeScript Typecheck** | `tsc` compilation | **0 Type Mismatches** | Fully verified |
 | **Live API Health Check** | `GET https://vriksh.onrender.com/health` | **HTTP 200 OK** | Live on Render cloud |
-| **Live Frontend Interface** | Edge deployment on Vercel | **Active & Synced** | Live on Vercel Edge |
+| **Live Frontend Interface** | `https://veyra-lilac-three.vercel.app` | **Active & Synced** | Live on Vercel Edge |
 
 ---
 

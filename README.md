@@ -8,8 +8,8 @@
 [![Weighted F1: 88.47%](https://img.shields.io/badge/Weighted%20F1-88.47%25-indigo.svg)](./docs/EXPERIMENTS.md)
 [![Parameters: 704K](https://img.shields.io/badge/Parameters-703%2C603%20(2.8%20MB)-orange.svg)](./docs/ARCHITECTURE.md)
 [![Backend: FastAPI](https://img.shields.io/badge/Backend-FastAPI%200.115-009688.svg)](./docs/API.md)
-[![Frontend: Next.js 16](https://img.shields.io/badge/Frontend-Next.js%2016%20%7C%20React%2019-black.svg)](./veyra)
-[![Deployment: Render + Vercel](https://img.shields.io/badge/Deployment-Render%20%2B%20Vercel-success.svg)](./docs/DEPLOYMENT.md)
+[![Live Frontend: Vercel](https://img.shields.io/badge/Live%20App-veyra--lilac--three.vercel.app-success.svg)](https://veyra-lilac-three.vercel.app/)
+[![Live API: Render](https://img.shields.io/badge/Live%20API-vriksh.onrender.com-009688.svg)](https://vriksh.onrender.com/health)
 
 <br/>
 
@@ -19,7 +19,7 @@
 
 **VEYRA** (Visual Evaluation & Yield Risk Assessment) is an open-access crop pathology platform that diagnoses foliar diseases across **211 agricultural categories** from standard smartphone leaf photographs.
 
-[Live API Health Check](https://vriksh.onrender.com/health) • [System Architecture](./docs/ARCHITECTURE.md) • [Model Card](./docs/MODEL_CARD.md) • [Technical Project Report](./docs/REPORT.md)
+🚀 **[Open Live Web Application](https://veyra-lilac-three.vercel.app/)** • ⚡ **[Live API Health Check](https://vriksh.onrender.com/health)** • [System Architecture](./docs/ARCHITECTURE.md) • [Model Card](./docs/MODEL_CARD.md) • [Technical Project Report](./docs/REPORT.md)
 
 </div>
 
@@ -53,7 +53,7 @@ Plant pathogens cause an estimated 20% to 40% loss of global agricultural yield 
 | :--- | :--- | :--- |
 | **Machine Learning Core** | PyTorch 2.4.1 (CPU wheel), Torchvision 0.19.1, Pillow 10.4 | In-Memory (Linux container) |
 | **API Microservice** | FastAPI 0.115.5, Uvicorn 0.32.1, Python 3.11 | **Render** (Production: `https://vriksh.onrender.com`) |
-| **Web Frontend** | Next.js 16.3.8 (App Router), React 19, TypeScript, Tailwind CSS, Framer Motion | **Vercel** Edge Network |
+| **Web Frontend** | Next.js 16.3.8 (App Router), React 19, TypeScript, Tailwind CSS, Framer Motion | **Vercel** (Production: `https://veyra-lilac-three.vercel.app`) |
 | **Testing & Verification** | Python `unittest` / `test_local.py`, TypeScript Compiler (`tsc`) | Local & CI Workflows |
 
 ---
