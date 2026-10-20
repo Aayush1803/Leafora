@@ -70,7 +70,7 @@ source .venv/bin/activate
 
 ### 2. Install Dependencies
 
-The `requirements.txt` file is pre-configured with `--index-url https://download.pytorch.org/whl/cpu` to install the lightweight CPU-only build of PyTorch:
+The `requirements.txt` file is pre-configured with `--extra-index-url https://download.pytorch.org/whl/cpu` to install the lightweight CPU-only build of PyTorch while sourcing web packages from PyPI:
 
 ```bash
 pip install -r requirements.txt

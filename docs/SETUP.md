@@ -105,7 +105,7 @@ pip install -r requirements.txt
 ```
 
 > **Note on PyTorch Installation:**  
-> The `requirements.txt` contains `--index-url https://download.pytorch.org/whl/cpu`. This ensures that pip fetches the ~180 MB CPU wheel rather than the ~2.5 GB CUDA wheel, saving bandwidth and disk space.
+> The `requirements.txt` contains `--extra-index-url https://download.pytorch.org/whl/cpu`. This allows pip to fetch standard packages (FastAPI, Uvicorn, Pillow) from PyPI while resolving the ~180 MB CPU-only PyTorch wheel from the extra index, saving bandwidth and disk space.
 
 ### Step 3.3: Verify Model Checkpoint Presence
 

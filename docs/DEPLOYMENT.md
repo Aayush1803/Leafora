@@ -45,7 +45,7 @@ flowchart TD
 Standard PyTorch distributions from PyPI default to CUDA-enabled packages totaling over 2 GB. On Render's 512 MB container build limits, this leads to deployment timeouts. VEYRA's `requirements.txt` specifies:
 
 ```text
---index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
 
 fastapi==0.115.5
 uvicorn[standard]==0.32.1
