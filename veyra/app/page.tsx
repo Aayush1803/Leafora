@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageShell from "@/components/PageShell";
@@ -90,6 +91,38 @@ export default function AnalyzePage() {
             >
               {/* Hero */}
               <div style={{ marginBottom: "clamp(2.5rem, 5vw, 4rem)" }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.4 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    marginBottom: "1.25rem",
+                  }}
+                >
+                  <Image
+                    src="/logo-mark.png"
+                    alt=""
+                    width={22}
+                    height={15}
+                    priority
+                    style={{ height: "16px", width: "auto" }}
+                  />
+                  <span
+                    style={{
+                      fontSize: "0.75rem",
+                      fontWeight: "700",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "var(--color-accent)",
+                    }}
+                  >
+                    Precision Leaf Analysis
+                  </span>
+                </motion.div>
+
                 <motion.h1
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer
@@ -18,6 +20,18 @@ export default function Footer() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={18}
+            height={12}
+            style={{
+              height: "13px",
+              width: "auto",
+              display: "block",
+              opacity: 0.85,
+            }}
+          />
           <span
             style={{
               fontSize: "0.8125rem",

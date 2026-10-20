@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -495,26 +496,40 @@ function CornerLabel({
 
 function AnalyzingIndicator() {
   return (
-    <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-      {[0, 1, 2].map((i) => (
-        <motion.span
-          key={i}
-          animate={{ opacity: [0.3, 1, 0.3], y: [0, -4, 0] }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            delay: i * 0.18,
-            ease: "easeInOut",
-          }}
-          style={{
-            display: "block",
-            width: "5px",
-            height: "5px",
-            borderRadius: "50%",
-            backgroundColor: "var(--color-accent)",
-          }}
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem" }}>
+      <motion.div
+        animate={{ opacity: [0.7, 1, 0.7], scale: [0.97, 1.03, 0.97] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Image
+          src="/logo-mark.png"
+          alt=""
+          width={36}
+          height={24}
+          style={{ height: "24px", width: "auto" }}
         />
-      ))}
+      </motion.div>
+      <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            animate={{ opacity: [0.3, 1, 0.3], y: [0, -4, 0] }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              delay: i * 0.18,
+              ease: "easeInOut",
+            }}
+            style={{
+              display: "block",
+              width: "5px",
+              height: "5px",
+              borderRadius: "50%",
+              backgroundColor: "var(--color-accent)",
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

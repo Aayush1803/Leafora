@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import PageShell from "@/components/PageShell";
 
 export const metadata: Metadata = {
@@ -16,6 +17,20 @@ export default function AboutPage() {
       >
         {/* Wordmark section */}
         <div style={{ marginBottom: "clamp(3.5rem, 7vw, 6rem)" }}>
+          <div style={{ marginBottom: "1.75rem" }}>
+            <Image
+              src="/logo-mark.png"
+              alt="VEYRA Emblem"
+              width={72}
+              height={48}
+              priority
+              style={{
+                height: "44px",
+                width: "auto",
+                display: "block",
+              }}
+            />
+          </div>
           <h1
             style={{
               fontFamily: "var(--font-playfair), Georgia, serif",

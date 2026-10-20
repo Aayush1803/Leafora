@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -43,23 +44,25 @@ export default function Navigation() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
               textDecoration: "none",
+              borderRadius: "var(--radius-sm)",
             }}
+            className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-4"
             aria-label="VEYRA home"
           >
-            <VeyraLogo />
-            <span
+            <Image
+              src="/logo-horizontal.png"
+              alt="VEYRA"
+              width={122}
+              height={26}
+              priority
               style={{
-                fontFamily: "var(--font-inter), sans-serif",
-                fontSize: "1.0625rem",
-                fontWeight: "700",
-                letterSpacing: "0.18em",
-                color: "var(--color-text-primary)",
+                height: "26px",
+                width: "auto",
+                maxWidth: "135px",
+                display: "block",
               }}
-            >
-              VEYRA
-            </span>
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -238,32 +241,3 @@ function NavLink({
   );
 }
 
-function VeyraLogo() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      fill="none"
-      aria-hidden="true"
-    >
-      {/* Abstract geometric mark — concentric arc segments suggesting a cross-section */}
-      <circle
-        cx="11"
-        cy="11"
-        r="9.5"
-        stroke="var(--color-accent)"
-        strokeWidth="1.2"
-        fill="none"
-      />
-      <path
-        d="M 11 3 L 11 11 L 18 11"
-        stroke="var(--color-accent)"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <circle cx="11" cy="11" r="2" fill="var(--color-accent)" />
-    </svg>
-  );
-}

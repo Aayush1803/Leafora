@@ -15,6 +15,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "https://veyra.app"
+  ),
   title: {
     default: "VEYRA — Crop Analysis",
     template: "%s | VEYRA",
@@ -22,10 +25,27 @@ export const metadata: Metadata = {
   description:
     "Precision crop-disease analysis. Upload a leaf image and receive a structured diagnosis powered by the 211-class VEYRA custom CNN.",
   keywords: ["crop disease", "plant analysis", "leaf diagnosis", "agricultural AI"],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo-mark.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "VEYRA — Crop Analysis",
     description: "Precision crop-disease image analysis.",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 810,
+        height: 576,
+        alt: "VEYRA Crop Analysis",
+      },
+    ],
   },
 };
 
