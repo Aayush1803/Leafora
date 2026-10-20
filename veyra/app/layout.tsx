@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | VEYRA",
   },
   description:
-    "Precision crop-disease analysis. Upload a leaf image and receive a structured diagnosis powered by a 38-class CNN trained on PlantVillage.",
+    "Precision crop-disease analysis. Upload a leaf image and receive a structured diagnosis powered by the 211-class VEYRA custom CNN.",
   keywords: ["crop disease", "plant analysis", "leaf diagnosis", "agricultural AI"],
   openGraph: {
     title: "VEYRA — Crop Analysis",

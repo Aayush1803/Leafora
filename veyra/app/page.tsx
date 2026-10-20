@@ -90,16 +90,6 @@ export default function AnalyzePage() {
             >
               {/* Hero */}
               <div style={{ marginBottom: "clamp(2.5rem, 5vw, 4rem)" }}>
-                <motion.p
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.4 }}
-                  className="t-label"
-                  style={{ marginBottom: "1rem" }}
-                >
-                  CROP ANALYSIS / MODEL 01
-                </motion.p>
-
                 <motion.h1
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -121,8 +111,8 @@ export default function AnalyzePage() {
                     lineHeight: "1.7",
                   }}
                 >
-                  Submit a leaf image. Receive a structured diagnosis across 38
-                  crop-disease categories, drawn from the PlantVillage dataset.
+                  Submit a leaf image. Receive a structured diagnosis across 211
+                  crop-disease categories, powered by the VEYRA custom CNN.
                 </motion.p>
               </div>
 
@@ -168,8 +158,8 @@ export default function AnalyzePage() {
                 }}
               >
                 {[
-                  { label: "CROPS", value: "14 supported" },
-                  { label: "CLASSES", value: "38 conditions" },
+                  { label: "CLASSES", value: "211" },
+                  { label: "TEST SAMPLES", value: "19,946" },
                   { label: "FORMAT", value: "JPG / PNG" },
                   { label: "LIMIT", value: "10 MB" },
                 ].map((item) => (

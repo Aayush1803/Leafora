@@ -32,8 +32,8 @@ export default function Footer() {
           <span className="t-caption">Crop Analysis</span>
         </div>
         <div style={{ display: "flex", gap: "1.5rem" }}>
-          <span className="t-caption">Model 01 — PlantVillage CNN</span>
-          <span className="t-caption">38 Classes</span>
+          <span className="t-caption">VEYRA CNN</span>
+          <span className="t-caption">211 Classes</span>
         </div>
       </div>
     </footer>

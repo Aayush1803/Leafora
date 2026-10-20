@@ -24,25 +24,57 @@ export interface ApiError {
   message: string;
 }
 
-/** Parse a raw PlantVillage class name into a readable label.
- *  "Tomato___Yellow_Leaf_Curl_Virus" → { crop: "Tomato", condition: "Yellow Leaf Curl Virus" }
+/**
+ * Parse a class name returned by the VEYRA backend into a human-readable label.
+ *
+ * Supports two formats:
+ *  - PlantVillage triple-underscore: "Tomato___Late_blight"
+ *  - VEYRA 211-class snake_case:     "tomato_late_blight", "corn_maize_healthy"
+ *
+ * Returns { crop, condition, isHealthy }.
  */
 export function parseClassName(raw: string): {
   crop: string;
   condition: string;
   isHealthy: boolean;
 } {
-  const parts = raw.split("___");
-  const crop = (parts[0] ?? raw)
-    .replace(/_/g, " ")
-    .replace(/\(.*?\)/g, "")
-    .trim();
-  const conditionRaw = parts[1] ?? "";
-  const condition = conditionRaw
-    .replace(/_/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  const isHealthy = condition.toLowerCase() === "healthy";
+  // ── PlantVillage format: "Tomato___Late_blight" ──
+  if (raw.includes("___")) {
+    const parts = raw.split("___");
+    const crop = (parts[0] ?? raw)
+      .replace(/_/g, " ")
+      .replace(/\(.*?\)/g, "")
+      .trim();
+    const conditionRaw = parts[1] ?? "";
+    const condition = conditionRaw
+      .replace(/_/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const isHealthy = condition.toLowerCase() === "healthy";
+    return { crop, condition, isHealthy };
+  }
+
+  // ── VEYRA 211-class snake_case format: "tomato_late_blight" ──
+  const words = raw.split("_");
+  const isHealthy = words[words.length - 1]?.toLowerCase() === "healthy";
+
+  const cropWord = words[0] ?? raw;
+  const conditionWords = words.slice(1);
+
+  // If the class is a single word (e.g. "basil"), show it as condition with no separate crop.
+  if (conditionWords.length === 0) {
+    const label = cropWord.charAt(0).toUpperCase() + cropWord.slice(1);
+    return { crop: "", condition: label, isHealthy: false };
+  }
+
+  const crop = cropWord.charAt(0).toUpperCase() + cropWord.slice(1);
+
+  const condition = isHealthy
+    ? "Healthy"
+    : conditionWords
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+
   return { crop, condition, isHealthy };
 }
 

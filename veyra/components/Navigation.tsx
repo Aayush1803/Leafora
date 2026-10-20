@@ -77,21 +77,9 @@ export default function Navigation() {
             })}
           </div>
 
-          {/* Engine badge + mobile menu */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span
-              className="t-label hidden-mobile"
-              style={{
-                padding: "3px 8px",
-                border: "1px solid var(--color-border)",
-                borderRadius: "var(--radius-sm)",
-                color: "var(--color-text-muted)",
-              }}
-            >
-              MODEL 01
-            </span>
 
-            {/* Mobile hamburger */}
+          {/* Mobile hamburger */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="show-mobile"
@@ -188,11 +176,6 @@ export default function Navigation() {
                   </motion.div>
                 );
               })}
-              <div style={{ paddingTop: "1rem" }}>
-                <span className="t-label" style={{ color: "var(--color-text-muted)" }}>
-                  MODEL 01 — PlantVillage CNN
-                </span>
-              </div>
             </div>
           </motion.div>
         )}

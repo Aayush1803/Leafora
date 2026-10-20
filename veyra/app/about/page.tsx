@@ -4,7 +4,7 @@ import PageShell from "@/components/PageShell";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "VEYRA — crop image analysis beginning with a 38-class PlantVillage model. Project purpose, scope, and future direction.",
+    "VEYRA — crop image analysis powered by a 211-class custom CNN. Project purpose, architecture, training data, and future direction.",
 };
 
 export default function AboutPage() {
@@ -38,7 +38,7 @@ export default function AboutPage() {
               fontWeight: "400",
             }}
           >
-            Crop image analysis, beginning with a 38-class PlantVillage model.
+            Crop image analysis powered by a 211-class custom CNN.
           </p>
         </div>
 
@@ -79,11 +79,11 @@ export default function AboutPage() {
             }}
           >
             {[
-              { label: "MODEL", value: "Model 01" },
               { label: "ARCHITECTURE", value: "Custom CNN" },
-              { label: "CLASSES", value: "38" },
-              { label: "DATASET", value: "PlantVillage" },
-              { label: "CROPS", value: "14" },
+              { label: "CLASSES", value: "211" },
+              { label: "DATASET", value: "Multiple sources" },
+              { label: "INPUT", value: "128 × 128 px" },
+              { label: "TEST ACCURACY", value: "87.95%" },
               { label: "INFERENCE", value: "CPU" },
             ].map((item) => (
               <div
@@ -110,10 +110,11 @@ export default function AboutPage() {
             ))}
           </div>
           <p className="t-body">
-            The model was trained on the PlantVillage dataset — a structured
-            collection of leaf photographs acquired under controlled laboratory
-            conditions. It classifies 38 distinct categories spanning diseased
-            and healthy states across 14 crop species.
+            The model was trained on a combined dataset drawn from multiple
+            agricultural image sources. It classifies 211 distinct categories
+            spanning diseased and healthy states across multiple crop species.
+            Offline test accuracy: ~87.95% on 19,946 held-out samples
+            (weighted F1: ~88.47%; macro F1: ~44.00%).
           </p>
         </AboutSection>
 
@@ -126,7 +127,7 @@ export default function AboutPage() {
               { name: "Next.js", role: "Frontend application" },
               { name: "Framer Motion", role: "Interface animation" },
               { name: "Tailwind CSS", role: "Styling foundation" },
-              { name: "PlantVillage", role: "Training dataset" },
+              { name: "Multiple datasets", role: "Training data (Agri Foundation + others)" },
             ].map((item) => (
               <div
                 key={item.name}
@@ -156,8 +157,8 @@ export default function AboutPage() {
         {/* Future */}
         <AboutSection label="FUTURE DIRECTION">
           <p className="t-body">
-            Model 01 is intentionally minimal — a working baseline. Future
-            iterations will explore:
+            The current model establishes a working baseline for crop disease
+            classification. Future iterations may explore:
           </p>
           <div
             style={{
@@ -168,7 +169,7 @@ export default function AboutPage() {
             }}
           >
             {[
-              "A unified model trained across a significantly expanded class set",
+              "Expand to field-condition images beyond controlled laboratory settings",
               "Explainability overlays — visualising which regions of the image influenced the diagnosis",
               "Severity estimation alongside classification",
               "Field-condition robustness through augmented training",

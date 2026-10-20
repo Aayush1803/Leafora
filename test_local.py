@@ -1,40 +1,52 @@
 #!/usr/bin/env python3
 """
-test_local.py — Local smoke-test for the Crop Disease Detection backend.
+test_local.py — Local smoke-test for the VEYRA Crop Disease Detection backend.
 
-Run BEFORE deploying to Railway to verify:
-  1. Model loads successfully from models/best_color_model.pth
-  2. A sanity check verifies input [1,3,128,128] -> output [1,38]
-  3. A real PlantVillage image can be processed
-  4. /predict returns exactly 3 top predictions
-  5. All confidence values sum to ~1.0
-  6. The API server responds to GET /health  (requires server to be running)
-  7. The API server responds to POST /predict (requires server to be running)
+This file is the ROOT-LEVEL version. The backend lives in crop-disease-backend/
+and deployment reads from the project root via Procfile.
+
+Run BEFORE deploying to Render to verify:
+  1. Model loads successfully from crop-disease-backend/models/veyra_cnn_best.pth
+  2. Model config has 211 classes matching the checkpoint
+  3. A sanity check verifies input [1,3,128,128] -> output [1,211]
+  4. CPU inference works end-to-end on a synthetic image
+  5. /predict returns top-3 predictions with the correct response structure
+  6. All confidence values are in [0, 1]
+  7. File validation correctly accepts/rejects MIME types and sizes
+  8. GET /health reports model_loaded=true (requires server to be running)
+  9. POST /predict returns a valid JSON prediction (requires server)
 
 Usage
 -----
-# Test model + inference logic only (no server needed):
-  python test_local.py --offline --image path/to/leaf.jpg
+# Offline — tests model loading + inference logic (no server needed):
+  cd crop-disease-backend
+  python ../test_local.py --offline
 
-# Full test including live API calls (start uvicorn first):
-  uvicorn app.main:app --reload   # in a separate terminal
+# With a real image:
+  python ../test_local.py --offline --image path/to/leaf.jpg
+
+# Full test — also hits the live API (start uvicorn first in another terminal):
+  cd crop-disease-backend && uvicorn app.main:app --reload
   python test_local.py --image path/to/leaf.jpg
 
-# Custom server URL:
-  python test_local.py --url http://localhost:8000 --image path/to/leaf.jpg
+NOTE: This is the root-level copy kept in sync with crop-disease-backend/test_local.py.
 """
 
 import argparse
 import io
-import os
 import sys
-import time
 import traceback
 from pathlib import Path
 
-# Ensure the project root is on sys.path
-PROJECT_ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(PROJECT_ROOT))
+# Route sys.path to the backend directory so 'app' package resolves.
+BACKEND_ROOT = Path(__file__).resolve().parent / "crop-disease-backend"
+sys.path.insert(0, str(BACKEND_ROOT))
+
+# Ensure UTF-8 output on Windows consoles
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 # ── ANSI colours ──────────────────────────────────────────────────────────────
 GREEN = "\033[92m"
@@ -67,12 +79,12 @@ def section(title: str) -> None:
 def get_test_image_bytes(image_path: str | None) -> bytes:
     """Return raw bytes of a provided image path."""
     if not image_path:
-        raise ValueError("A real PlantVillage image is required. Provide it via --image <path>.")
-    
+        raise ValueError("A real leaf image is required. Provide it via --image <path>.")
+
     path = Path(image_path)
     if not path.exists():
         raise FileNotFoundError(f"Image not found at {path}")
-    
+
     with open(path, "rb") as f:
         return f.read()
 
@@ -81,12 +93,19 @@ def get_test_image_bytes(image_path: str | None) -> bytes:
 def test_model_loading():
     section("Test 1 — Model Loading")
     try:
-        from app.inference import load_model, _MODEL_PATH
-        print(f"  Model path: {_MODEL_PATH}")
+        from app.inference import load_model, _MODEL_PATH, _CONFIG_PATH
+        print(f"  Checkpoint : {_MODEL_PATH}")
+        print(f"  Config     : {_CONFIG_PATH}")
+
         if not _MODEL_PATH.exists():
-            fail(f"best_color_model.pth not found at {_MODEL_PATH}")
-            print(f"       {RED}→ Copy your .pth file to models/best_color_model.pth{RESET}")
+            fail(f"veyra_cnn_best.pth not found at {_MODEL_PATH}")
+            print(f"       {RED}→ Copy the checkpoint to models/veyra_cnn_best.pth{RESET}")
             return False
+        if not _CONFIG_PATH.exists():
+            fail(f"model_config.json not found at {_CONFIG_PATH}")
+            print(f"       {RED}→ Copy the config to models/model_config.json{RESET}")
+            return False
+
         model = load_model()
         ok("Model loaded without errors")
         ok(f"Model type: {type(model).__name__}")
@@ -99,24 +118,62 @@ def test_model_loading():
         return False
 
 
-# ── TEST 1.5: model sanity ────────────────────────────────────────────────────
+# ── TEST 1.5: class mapping consistency ───────────────────────────────────────
+def test_class_mapping():
+    section("Test 1.5 — Class Mapping Consistency")
+    try:
+        from app.inference import get_class_names, _num_classes
+        class_names = get_class_names()
+
+        assert len(class_names) == 211, (
+            f"Expected 211 class names, got {len(class_names)}"
+        )
+        ok(f"Class name count: {len(class_names)} (expected 211)")
+
+        assert _num_classes == 211, (
+            f"_num_classes={_num_classes}, expected 211"
+        )
+        ok(f"_num_classes matches: {_num_classes}")
+
+        # Spot-check known class names from model_config.json
+        assert "tomato_late_blight" in class_names, "Expected 'tomato_late_blight' in class list"
+        ok("Spot-check 'tomato_late_blight' present")
+
+        assert "apple_scab" in class_names, "Expected 'apple_scab' in class list"
+        ok("Spot-check 'apple_scab' present")
+
+        return True
+    except Exception as exc:
+        fail(f"Class mapping check raised: {exc}")
+        traceback.print_exc()
+        return False
+
+
+# ── TEST 2: model sanity ──────────────────────────────────────────────────────
 def test_model_sanity():
-    section("Test 1.5 — Model Sanity")
+    section("Test 2 — Model Sanity (shape + softmax)")
     try:
         import torch
-        from app.inference import get_model
-        model = get_model()
+        from app.inference import get_model, get_class_names
+
+        model       = get_model()
+        class_names = get_class_names()
+        n           = len(class_names)
+
         dummy_input = torch.randn(1, 3, 128, 128)
-        
-        with torch.no_grad():
+
+        with torch.inference_mode():
             output = model(dummy_input)
-            
-        assert output.shape == (1, 38), f"Expected shape (1, 38), got {output.shape}"
-        ok(f"Output shape is correct: {tuple(output.shape)}")
-        
+
+        assert output.shape == (1, n), f"Expected shape (1, {n}), got {output.shape}"
+        ok(f"Output shape correct: {tuple(output.shape)}")
+
+        assert torch.isfinite(output).all(), "Model output contains non-finite values"
+        ok("Output values are finite")
+
         prob_sum = torch.softmax(output, dim=1).sum().item()
-        assert 0.99 < prob_sum < 1.01, f"Softmax sum is {prob_sum}, expected ~1.0"
-        ok(f"Softmax sum ≈ 1.0 ({prob_sum:.4f})")
+        assert 0.999 < prob_sum < 1.001, f"Softmax sum is {prob_sum}, expected ≈1.0"
+        ok(f"Softmax sum ≈ 1.0 ({prob_sum:.6f})")
         return True
     except Exception as exc:
         fail(f"Model sanity check raised: {exc}")
@@ -124,12 +181,13 @@ def test_model_sanity():
         return False
 
 
-# ── TEST 2: preprocessing ────────────────────────────────────────────────────
+# ── TEST 3: preprocessing ─────────────────────────────────────────────────────
 def test_preprocessing(image_path: str | None):
-    section("Test 2 — Image Preprocessing")
+    section("Test 3 — Image Preprocessing")
     try:
         img_bytes = get_test_image_bytes(image_path)
         from app.inference import preprocess_image
+
         tensor = preprocess_image(img_bytes)
         assert tensor.shape == (1, 3, 128, 128), f"Unexpected shape: {tensor.shape}"
         ok(f"Output tensor shape: {tuple(tensor.shape)}")
@@ -144,30 +202,42 @@ def test_preprocessing(image_path: str | None):
         return False
 
 
-# ── TEST 3: full prediction ───────────────────────────────────────────────────
+# ── TEST 4: full prediction ───────────────────────────────────────────────────
 def test_prediction(image_path: str | None):
-    section("Test 3 — Prediction (top-3)")
+    section("Test 4 — Prediction (top-3)")
     try:
         img_bytes = get_test_image_bytes(image_path)
-        from app.inference import predict
-        from app.classes import CLASS_NAMES
-        
-        result = predict(img_bytes, top_k=3)
+        from app.inference import predict, get_class_names
 
-        assert "predicted_class" in result, "Missing 'predicted_class'"
-        assert "confidence" in result, "Missing 'confidence'"
-        assert "top_predictions" in result, "Missing 'top_predictions'"
+        class_names = get_class_names()
+        result      = predict(img_bytes, top_k=3)
+
+        assert "predicted_class" in result,    "Missing 'predicted_class'"
+        assert "confidence"      in result,    "Missing 'confidence'"
+        assert "top_predictions" in result,    "Missing 'top_predictions'"
         assert len(result["top_predictions"]) == 3, (
             f"Expected 3 predictions, got {len(result['top_predictions'])}"
         )
-        
+        ok("Response has 'predicted_class', 'confidence', 'top_predictions'")
+        ok("Exactly 3 top predictions returned")
+
         for p in result["top_predictions"]:
-            assert p["class"] in CLASS_NAMES, f"Invalid class predicted: {p['class']}"
+            assert "class"      in p, "Prediction entry missing 'class'"
+            assert "confidence" in p, "Prediction entry missing 'confidence'"
+            assert p["class"] in class_names, (
+                f"Returned class '{p['class']}' not in 211-class list"
+            )
+            assert 0.0 <= p["confidence"] <= 1.0, (
+                f"Confidence {p['confidence']} outside [0, 1]"
+            )
+        ok("All predicted classes are in the 211-class mapping")
+        ok("All confidence scores are in [0.0, 1.0]")
 
         ok(f"Predicted class : {result['predicted_class']}")
         ok(f"Confidence      : {result['confidence']:.4f}")
+
         print(f"\n  {'Class':<55} {'Confidence':>10}")
-        print(f"  {'-'*66}")
+        print(f"  {'-' * 66}")
         for i, p in enumerate(result["top_predictions"], 1):
             print(f"  {i}. {p['class']:<52} {p['confidence']:>10.4f}")
 
@@ -183,19 +253,49 @@ def test_prediction(image_path: str | None):
         return False
 
 
-# ── TEST 4: validation ────────────────────────────────────────────────────────
+# ── TEST 5: CPU smoke test ───────────────────────────────────────────────────
+def test_cpu_inference_smoke():
+    section("Test 5 — CPU Inference Smoke Test")
+    try:
+        import torch
+        from PIL import Image
+        from app.inference import get_model, get_class_names, _TRANSFORM
+
+        # Synthesise a 200×200 green-ish leaf-like image
+        img    = Image.new("RGB", (200, 200), color=(34, 139, 34))
+        tensor = _TRANSFORM(img).unsqueeze(0)
+
+        model       = get_model()
+        class_names = get_class_names()
+
+        with torch.inference_mode():
+            probs = torch.softmax(model(tensor), dim=1)[0]
+
+        top_prob, top_idx = probs.max(0)
+        ok("CPU inference succeeded on synthetic image")
+        ok(f"Top class  : {class_names[top_idx.item()]} ({top_prob.item():.4f})")
+        ok(f"Output dim : {len(probs)} (expected 211)")
+        assert len(probs) == 211
+        return True
+    except Exception as exc:
+        fail(f"CPU smoke test raised: {exc}")
+        traceback.print_exc()
+        return False
+
+
+# ── TEST 6: validation ────────────────────────────────────────────────────────
 def test_validation():
-    section("Test 4 — File Validation")
+    section("Test 6 — File Validation")
     from app.inference import validate_file
 
     cases = [
         # (filename, content_type, size, should_raise, description)
-        ("leaf.jpg",  "image/jpeg", 1024,                   False, "Valid JPEG"),
-        ("leaf.png",  "image/png",  1024,                   False, "Valid PNG"),
-        ("leaf.bmp",  "image/bmp",  1024,                   True,  "Reject BMP"),
-        ("leaf.gif",  "image/gif",  1024,                   True,  "Reject GIF"),
-        ("leaf.jpg",  "image/jpeg", 11 * 1024 * 1024,       True,  "Reject >10 MB"),
-        ("leaf.jpg",  "text/plain", 1024,                   True,  "Reject wrong MIME"),
+        ("leaf.jpg",  "image/jpeg", 1024,                  False, "Valid JPEG"),
+        ("leaf.png",  "image/png",  1024,                  False, "Valid PNG"),
+        ("leaf.bmp",  "image/bmp",  1024,                  True,  "Reject BMP"),
+        ("leaf.gif",  "image/gif",  1024,                  True,  "Reject GIF"),
+        ("leaf.jpg",  "image/jpeg", 11 * 1024 * 1024,      True,  "Reject >10 MB"),
+        ("leaf.jpg",  "text/plain", 1024,                  True,  "Reject wrong MIME"),
     ]
 
     all_ok = True
@@ -215,9 +315,9 @@ def test_validation():
     return all_ok
 
 
-# ── TEST 5: live API (optional) ───────────────────────────────────────────────
+# ── TEST 7: live API (optional) ───────────────────────────────────────────────
 def test_api(base_url: str, image_path: str | None):
-    section(f"Test 5 — Live API  ({base_url})")
+    section(f"Test 7 — Live API  ({base_url})")
     try:
         import requests
     except ImportError:
@@ -229,8 +329,19 @@ def test_api(base_url: str, image_path: str | None):
     # GET /health
     try:
         r = requests.get(f"{base_url}/health", timeout=10)
-        if r.status_code == 200 and r.json().get("status") == "ok":
-            ok(f"GET /health → 200 OK  {r.json()}")
+        data = r.json()
+        if r.status_code == 200 and data.get("status") == "ok":
+            ok(f"GET /health → 200 OK  {data}")
+            if data.get("model_loaded"):
+                ok("model_loaded=true")
+            else:
+                fail("model_loaded is not true — model may not have loaded at startup")
+                all_ok = False
+            if data.get("num_classes") == 211:
+                ok("num_classes=211 ✓")
+            else:
+                fail(f"num_classes={data.get('num_classes')}, expected 211")
+                all_ok = False
         else:
             fail(f"GET /health → {r.status_code}  {r.text[:200]}")
             all_ok = False
@@ -245,8 +356,11 @@ def test_api(base_url: str, image_path: str | None):
         r = requests.post(f"{base_url}/predict", files=files, timeout=30)
         if r.status_code == 200:
             data = r.json()
+            assert "predicted_class" in data
+            assert "confidence"      in data
+            assert "top_predictions" in data
             assert len(data["top_predictions"]) == 3
-            ok(f"POST /predict → 200 OK")
+            ok("POST /predict → 200 OK")
             ok(f"  predicted_class: {data['predicted_class']}")
             ok(f"  confidence     : {data['confidence']:.4f}")
         else:
@@ -264,24 +378,39 @@ def test_api(base_url: str, image_path: str | None):
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 def main():
-    parser = argparse.ArgumentParser(description="Local smoke-test for the crop-disease API")
-    parser.add_argument("--offline", action="store_true",
-                        help="Skip live API tests (no server required)")
-    parser.add_argument("--url", default="http://localhost:8000",
-                        help="Base URL of the running FastAPI server (default: http://localhost:8000)")
-    parser.add_argument("--image", default=None,
-                        help="Path to a real PlantVillage image file for testing")
+    parser = argparse.ArgumentParser(
+        description="Local smoke-test for the VEYRA crop-disease API (root-level runner)"
+    )
+    parser.add_argument(
+        "--offline", action="store_true",
+        help="Skip live API tests (no server required)",
+    )
+    parser.add_argument(
+        "--url", default="http://localhost:8000",
+        help="Base URL of the running FastAPI server (default: http://localhost:8000)",
+    )
+    parser.add_argument(
+        "--image", default=None,
+        help="Path to a real leaf image file for testing (JPG or PNG)",
+    )
     args = parser.parse_args()
 
-    print(f"\n{BOLD}Crop Disease Backend — Local Smoke Test{RESET}")
+    print(f"\n{BOLD}VEYRA Crop Disease Backend — Local Smoke Test (root runner){RESET}")
     print("=" * 70)
 
     model_ok = test_model_loading()
 
     if model_ok:
+        test_class_mapping()
         test_model_sanity()
+        test_cpu_inference_smoke()
+
+    if args.image:
         test_preprocessing(args.image)
         test_prediction(args.image)
+    else:
+        section("Tests 3 & 4 — Image Tests")
+        print(f"  {CYAN}(Skipped — no --image provided){RESET}")
 
     test_validation()
 

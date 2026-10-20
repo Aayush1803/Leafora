@@ -99,17 +99,20 @@ export default function ResultPanel({
             transition={{ delay: 0.24, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
           >
-            <p
-              style={{
-                fontSize: "0.8125rem",
-                fontWeight: "500",
-                letterSpacing: "0.02em",
-                color: "var(--color-text-muted)",
-                textTransform: "uppercase",
-              }}
-            >
-              {primary.crop}
-            </p>
+            {/* Crop name — only shown when we have a separate crop label */}
+            {primary.crop && (
+              <p
+                style={{
+                  fontSize: "0.8125rem",
+                  fontWeight: "500",
+                  letterSpacing: "0.02em",
+                  color: "var(--color-text-muted)",
+                  textTransform: "uppercase",
+                }}
+              >
+                {primary.crop}
+              </p>
+            )}
 
             <h2
               style={{
@@ -123,7 +126,7 @@ export default function ResultPanel({
                 letterSpacing: "-0.01em",
               }}
             >
-              {primary.isHealthy ? "Healthy" : primary.condition}
+              {primary.isHealthy ? "Healthy" : (primary.condition || result.predicted_class)}
             </h2>
 
             {primary.isHealthy && (
@@ -208,6 +211,10 @@ export default function ResultPanel({
               >
                 {alternatives.map((alt, i) => {
                   const parsed = parseClassName(alt.class);
+                  const displayCondition =
+                    parsed.isHealthy
+                      ? "Healthy"
+                      : parsed.condition || alt.class;
                   return (
                     <motion.div
                       key={alt.class}
@@ -229,18 +236,20 @@ export default function ResultPanel({
                       }}
                     >
                       <div>
-                        <p
-                          style={{
-                            fontSize: "0.6875rem",
-                            fontWeight: "500",
-                            color: "var(--color-text-muted)",
-                            letterSpacing: "0.04em",
-                            textTransform: "uppercase",
-                            marginBottom: "0.125rem",
-                          }}
-                        >
-                          {parsed.crop}
-                        </p>
+                        {parsed.crop && (
+                          <p
+                            style={{
+                              fontSize: "0.6875rem",
+                              fontWeight: "500",
+                              color: "var(--color-text-muted)",
+                              letterSpacing: "0.04em",
+                              textTransform: "uppercase",
+                              marginBottom: "0.125rem",
+                            }}
+                          >
+                            {parsed.crop}
+                          </p>
+                        )}
                         <p
                           style={{
                             fontSize: "0.875rem",
@@ -248,7 +257,7 @@ export default function ResultPanel({
                             color: "var(--color-text-secondary)",
                           }}
                         >
-                          {parsed.isHealthy ? "Healthy" : parsed.condition}
+                          {displayCondition}
                         </p>
                       </div>
                       <span
@@ -257,6 +266,8 @@ export default function ResultPanel({
                           fontWeight: "600",
                           color: "var(--color-text-muted)",
                           fontVariantNumeric: "tabular-nums",
+                          flexShrink: 0,
+                          marginLeft: "1rem",
                         }}
                       >
                         {formatConfidence(alt.confidence)}
@@ -268,12 +279,36 @@ export default function ResultPanel({
             </motion.div>
           )}
 
+          {/* Disclaimer */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.3 }}
+            style={{
+              padding: "0.875rem 1rem",
+              backgroundColor: "var(--color-surface)",
+              border: "1px solid var(--color-border-subtle)",
+              borderRadius: "var(--radius-md)",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "0.75rem",
+                color: "var(--color-text-muted)",
+                lineHeight: "1.6",
+              }}
+            >
+              Confidence scores reflect model certainty on the training
+              distribution, not a guarantee of diagnostic accuracy. Always
+              consult an agronomist for crop management decisions.
+            </p>
+          </motion.div>
+
           {/* Reset action */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.72, duration: 0.3 }}
-            style={{ marginTop: "auto" }}
+            transition={{ delay: 0.8, duration: 0.3 }}
           >
             <motion.button
               whileHover={{ scale: 1.02 }}

@@ -1,0 +1,9 @@
+{
+  "checkpoint": "/content/drive/MyDrive/Crop_Disease_CNN/FreshExperiment/FineTune_90_Target/best_model.pth",
+  "test_samples": 19946,
+  "num_classes": 211,
+  "accuracy": 0.879524716735185,
+  "macro_f1": 0.4400172273319176,
+  "weighted_f1": 0.8846532501839789,
+  "evaluation_split": "test"
+}

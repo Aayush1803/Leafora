@@ -7,8 +7,10 @@ Startup behaviour:
     disk I/O.
 
 CORS:
-  • All origins allowed so the Vercel frontend can call this API.
-  • Tighten origins in production by replacing "*" with your Vercel URL.
+  • Wildcard origin is intentional: this is a public, read-only inference
+    API with no credentials or user data. The model outputs are not
+    sensitive. If authentication is added in future, restrict to specific
+    origins and disable allow_credentials=False override.
 """
 
 import logging
@@ -36,7 +38,7 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Load model on startup; nothing special needed on shutdown."""
-    logger.info("Application starting up — loading model …")
+    logger.info("Application starting up — loading VEYRA model …")
     try:
         load_model()
         logger.info("Model ready. API is live.")
@@ -51,12 +53,13 @@ async def lifespan(app: FastAPI):
 # FastAPI app
 # ---------------------------------------------------------------------------
 app = FastAPI(
-    title="Crop Disease Detection API",
+    title="VEYRA — Crop Disease Detection API",
     description=(
-        "Production inference API for a custom CNN model trained to classify "
-        "38 crop disease categories from the PlantVillage dataset."
+        "Production inference API for VEYRA's custom CropDiseaseCNN, "
+        "trained to classify 211 crop disease categories across multiple crops. "
+        "Offline test accuracy: ~87.95% on 19,946 test samples."
     ),
-    version="1.0.0",
+    version="2.0.0",
     lifespan=lifespan,
 )
 
@@ -80,32 +83,36 @@ app.add_middleware(
     "/health",
     summary="Health check",
     tags=["Health"],
-    response_description="Service liveness and model identifier",
+    response_description="Service liveness and model status",
 )
 async def health():
     """
-    Returns 200 OK when the service is running.
-    Reflects whether the model is actually loaded and ready.
+    Returns 200 OK when the service is running AND the model is loaded.
+    Returns 503 Service Unavailable when the model failed to load at startup.
     """
-    from app.inference import _model
+    from app.inference import _model, _num_classes
     model_ready = _model is not None
-    return {
-        "status": "ok",
-        "model": "color-cnn",
-        "model_loaded": model_ready
+    payload = {
+        "status":       "ok" if model_ready else "model_unavailable",
+        "model":        "veyra-cnn-211",
+        "model_loaded": model_ready,
+        "num_classes":  _num_classes if model_ready else 0,
     }
+    if not model_ready:
+        return JSONResponse(content=payload, status_code=status.HTTP_503_SERVICE_UNAVAILABLE)
+    return payload
 
 
 @app.post(
     "/predict",
-    summary="Predict crop disease from an image",
+    summary="Predict crop disease from a leaf image",
     tags=["Inference"],
     response_description="Top-3 predictions with confidence scores",
 )
 async def predict_endpoint(file: UploadFile = File(...)):
     """
     Accept a JPG or PNG plant-leaf image and return the top-3 predicted
-    disease classes with confidence scores.
+    disease classes with confidence scores (raw softmax, not calibrated).
 
     - **file**: image file (JPG / JPEG / PNG, max 10 MB)
     """
@@ -114,18 +121,19 @@ async def predict_endpoint(file: UploadFile = File(...)):
     if file.size and file.size > MAX_UPLOAD_BYTES:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"File exceeds maximum upload size of {MAX_UPLOAD_BYTES // (1024 * 1024)} MB."
+            detail=f"File exceeds maximum upload size of {MAX_UPLOAD_BYTES // (1024 * 1024)} MB.",
         )
 
     # ---- Read file into memory ----
     image_bytes = await file.read()
 
-    # ---- Validate ----
+    # ---- Validate (extension, MIME, size, then actual image content) ----
     try:
         validate_file(
             filename=file.filename or "upload",
             content_type=file.content_type or "",
             size_bytes=len(image_bytes),
+            image_bytes=image_bytes,
         )
     except ValueError as exc:
         raise HTTPException(
