@@ -19,7 +19,7 @@ export default function AboutPage() {
         <div style={{ marginBottom: "clamp(3.5rem, 7vw, 6rem)" }}>
           <div style={{ marginBottom: "1.75rem" }}>
             <Image
-              src="/leafora-logo.png"
+              src="/leafora-leaf.png"
               alt="LEAFORA"
               width={72}
               height={72}
@@ -38,7 +38,7 @@ export default function AboutPage() {
               fontWeight: "400",
               letterSpacing: "-0.02em",
               lineHeight: 1,
-              color: "var(--color-text-primary)",
+              color: "var(--color-brand)",
               marginBottom: "2rem",
             }}
           >

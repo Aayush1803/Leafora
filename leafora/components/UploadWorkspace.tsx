@@ -170,27 +170,26 @@ export default function UploadWorkspace({
                 style={{
                   position: "relative",
                   zIndex: 1,
-                  background: "none",
-                  border: "1px solid var(--color-border)",
+                  background: "var(--color-brand-soft)",
+                  border: "1px solid rgba(27, 77, 53, 0.3)",
                   borderRadius: "var(--radius-md)",
                   padding: "0.5rem 1.25rem",
                   fontSize: "0.8125rem",
-                  fontWeight: "500",
-                  color: "var(--color-text-secondary)",
+                  fontWeight: "600",
+                  color: "var(--color-brand)",
                   cursor: "pointer",
-                  letterSpacing: "0.02em",
-                  transition: "border-color 200ms, color 200ms",
+                  letterSpacing: "0.03em",
+                  transition: "background-color 200ms, border-color 200ms",
                 }}
                 onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.borderColor =
-                    "var(--color-accent)";
-                  (e.target as HTMLElement).style.color = "var(--color-accent)";
+                  (e.target as HTMLElement).style.backgroundColor =
+                    "rgba(27, 77, 53, 0.15)";
+                  (e.target as HTMLElement).style.borderColor = "var(--color-brand)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.borderColor =
-                    "var(--color-border)";
-                  (e.target as HTMLElement).style.color =
-                    "var(--color-text-secondary)";
+                  (e.target as HTMLElement).style.backgroundColor =
+                    "var(--color-brand-soft)";
+                  (e.target as HTMLElement).style.borderColor = "rgba(27, 77, 53, 0.3)";
                 }}
               >
                 Browse files
@@ -502,8 +501,8 @@ function AnalyzingIndicator() {
         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
       >
         <Image
-          src="/leafora-logo.png"
-          alt=""
+          src="/leafora-leaf.png"
+          alt="LEAFORA analyzing"
           width={36}
           height={36}
           style={{ height: "32px", width: "auto" }}
@@ -583,8 +582,8 @@ function AnalyzeButton({
       style={{
         backgroundColor: disabled
           ? "var(--color-border)"
-          : "var(--color-text-primary)",
-        color: disabled ? "var(--color-text-muted)" : "var(--color-background)",
+          : "var(--color-brand)",
+        color: disabled ? "var(--color-text-muted)" : "#ffffff",
         border: "none",
         borderRadius: "var(--radius-md)",
         padding: "0.625rem 1.5rem",
@@ -592,17 +591,18 @@ function AnalyzeButton({
         fontWeight: "600",
         letterSpacing: "0.04em",
         cursor: disabled ? "not-allowed" : "pointer",
-        transition: "background-color 250ms, color 250ms",
+        transition: "background-color 250ms, box-shadow 250ms",
         display: "flex",
         alignItems: "center",
         gap: "0.5rem",
         minWidth: "120px",
         justifyContent: "center",
+        boxShadow: disabled ? "none" : "0 2px 12px rgba(27, 77, 53, 0.22)",
       }}
     >
       {loading ? "Analysing…" : "Analyse"}
       {!loading && (
-        <span style={{ opacity: 0.6, fontSize: "0.75rem" }}>→</span>
+        <span style={{ opacity: 0.75, fontSize: "0.75rem" }}>→</span>
       )}
     </motion.button>
   );

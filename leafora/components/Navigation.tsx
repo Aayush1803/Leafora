@@ -24,7 +24,9 @@ export default function Navigation() {
         left: 0,
         right: 0,
         zIndex: 50,
-        backgroundColor: "var(--color-background)",
+        backgroundColor: "rgba(245, 242, 237, 0.88)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
         borderBottom: "1px solid var(--color-border-subtle)",
       }}
     >
@@ -44,6 +46,7 @@ export default function Navigation() {
             style={{
               display: "flex",
               alignItems: "center",
+              gap: "0.625rem",
               textDecoration: "none",
               borderRadius: "var(--radius-sm)",
             }}
@@ -51,18 +54,29 @@ export default function Navigation() {
             aria-label="LEAFORA home"
           >
             <Image
-              src="/leafora-logo.png"
+              src="/leafora-leaf.png"
               alt="LEAFORA"
-              width={122}
-              height={122}
+              width={34}
+              height={34}
               priority
               style={{
-                height: "32px",
+                height: "30px",
                 width: "auto",
-                maxWidth: "135px",
                 display: "block",
               }}
             />
+            <span
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "1.0625rem",
+                fontWeight: "700",
+                letterSpacing: "0.18em",
+                color: "var(--color-brand)",
+                lineHeight: 1,
+              }}
+            >
+              LEAFORA
+            </span>
           </Link>
 
           {/* Desktop nav */}

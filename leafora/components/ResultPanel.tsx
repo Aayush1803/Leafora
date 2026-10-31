@@ -88,8 +88,20 @@ export default function ResultPanel({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 0.35 }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
           >
             <span className="t-label">DIAGNOSIS</span>
+            <span
+              style={{
+                fontSize: "0.625rem",
+                fontWeight: "700",
+                letterSpacing: "0.14em",
+                color: "var(--color-brand)",
+                opacity: 0.7,
+              }}
+            >
+              LEAFORA CNN
+            </span>
           </motion.div>
 
           {/* Primary result */}
@@ -331,8 +343,8 @@ export default function ResultPanel({
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget;
-                el.style.borderColor = "var(--color-accent)";
-                el.style.color = "var(--color-accent)";
+                el.style.borderColor = "var(--color-brand)";
+                el.style.color = "var(--color-brand)";
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget;

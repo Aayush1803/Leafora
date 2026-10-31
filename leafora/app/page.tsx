@@ -97,26 +97,52 @@ export default function AnalyzePage() {
                   transition={{ delay: 0.1, duration: 0.4 }}
                   style={{
                     display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
+                    flexDirection: "column",
+                    gap: "0.35rem",
                     marginBottom: "1.25rem",
                   }}
                 >
-                  <Image
-                    src="/leafora-logo.png"
-                    alt=""
-                    width={22}
-                    height={22}
-                    priority
-                    style={{ height: "22px", width: "auto" }}
-                  />
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      padding: "0.3rem 0.75rem 0.3rem 0.45rem",
+                      border: "1px solid rgba(27, 77, 53, 0.25)",
+                      borderRadius: "999px",
+                      backgroundColor: "var(--color-brand-soft)",
+                      width: "fit-content",
+                    }}
+                  >
+                    <Image
+                      src="/leafora-leaf.png"
+                      alt="LEAFORA"
+                      width={28}
+                      height={28}
+                      priority
+                      style={{ height: "22px", width: "auto" }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-sans)",
+                        fontSize: "0.9375rem",
+                        fontWeight: "700",
+                        letterSpacing: "0.18em",
+                        color: "var(--color-brand)",
+                        lineHeight: 1,
+                      }}
+                    >
+                      LEAFORA
+                    </span>
+                  </div>
                   <span
                     style={{
-                      fontSize: "0.75rem",
+                      fontSize: "0.72rem",
                       fontWeight: "700",
-                      letterSpacing: "0.14em",
+                      letterSpacing: "0.16em",
                       textTransform: "uppercase",
-                      color: "var(--color-accent)",
+                      color: "var(--color-brand-mid)",
+                      paddingLeft: "0.25rem",
                     }}
                   >
                     Precision Leaf Analysis

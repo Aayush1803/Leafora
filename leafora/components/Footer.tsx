@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer
       style={{
@@ -21,23 +23,23 @@ export default function Footer() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <Image
-            src="/leafora-logo.png"
+            src="/leafora-leaf.png"
             alt="LEAFORA"
             width={24}
             height={24}
             style={{
-              height: "24px",
+              height: "22px",
               width: "auto",
               display: "block",
-              opacity: 0.85,
             }}
           />
           <span
             style={{
-              fontSize: "0.8125rem",
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.85rem",
               fontWeight: "700",
-              letterSpacing: "0.14em",
-              color: "var(--color-text-primary)",
+              letterSpacing: "0.18em",
+              color: "var(--color-brand)",
             }}
           >
             LEAFORA
@@ -45,9 +47,9 @@ export default function Footer() {
           <span className="t-caption">·</span>
           <span className="t-caption">Crop Analysis</span>
         </div>
-        <div style={{ display: "flex", gap: "1.5rem" }}>
-          <span className="t-caption">LEAFORA CNN</span>
-          <span className="t-caption">211 Classes</span>
+        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+          <span className="t-caption">211 Classes · CNN</span>
+          <span className="t-caption">© {year}</span>
         </div>
       </div>
     </footer>
