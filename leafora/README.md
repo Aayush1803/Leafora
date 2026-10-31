@@ -23,8 +23,8 @@ The modern, responsive web application for **LEAFORA**, built with Next.js 16 (A
 * **Styling:** Tailwind CSS 3.4
 * **Animations:** Framer Motion
 * **Deployment Target:** Vercel Global Edge Network
-* **Live Web Application:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)
-* **Live Backend API (Render):** [https://vriksh.onrender.com](https://vriksh.onrender.com)
+* **Live Web Application:** [https://leafora-one.vercel.app](https://leafora-one.vercel.app)
+* **Live Backend API (Render):** [https://leafora-3xm6.onrender.com](https://leafora-3xm6.onrender.com)
 
 ---
 
@@ -45,7 +45,7 @@ Create `.env.local` in the `leafora/` directory:
 NEXT_PUBLIC_API_URL=http://localhost:8000
 
 # OR point to live production backend on Render:
-# NEXT_PUBLIC_API_URL=https://vriksh.onrender.com
+# NEXT_PUBLIC_API_URL=https://leafora-3xm6.onrender.com
 ```
 
 ### 3. Start Development Server
@@ -94,13 +94,13 @@ leafora/
 ## Deployment (Vercel)
 
 The frontend is deployed to **Vercel** with automatic GitHub integration:
-* **Live Production URL:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)
+* **Live Production URL:** [https://leafora-one.vercel.app](https://leafora-one.vercel.app)
 * **Root Directory:** `leafora`
 * **Build Command:** `npm run build`
 * **Output Directory:** `.next`
 * **Environment Variables:**
-  * `NEXT_PUBLIC_API_URL=https://vriksh.onrender.com`
-  * `NEXT_PUBLIC_APP_URL=https://veyra-lilac-three.vercel.app`
+  * `NEXT_PUBLIC_API_URL=https://leafora-3xm6.onrender.com`
+  * `NEXT_PUBLIC_APP_URL=https://leafora-one.vercel.app`
 
 ---
 

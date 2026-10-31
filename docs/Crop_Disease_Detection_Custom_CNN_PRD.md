@@ -18,7 +18,7 @@
 | **Input Format** | RGB, $128 \times 128$, ImageNet Normalization |
 | **Backend Framework** | FastAPI (Python 3.11+, PyTorch CPU) |
 | **Frontend Framework** | Next.js 16 (React 19, TypeScript, Tailwind CSS) |
-| **Status** | Production Deployed (Render API: `https://vriksh.onrender.com` • Vercel Client: `https://LEAFORA-lilac-three.vercel.app`) |
+| **Status** | Production Deployed (Render API: `https://leafora-3xm6.onrender.com` • Vercel Client: `https://leafora-one.vercel.app`) |
 
 ---
 

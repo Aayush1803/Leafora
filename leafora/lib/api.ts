@@ -6,7 +6,7 @@
  */
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL ?? "https://vriksh.onrender.com";
+  process.env.NEXT_PUBLIC_API_URL ?? "https://leafora-3xm6.onrender.com";
 
 export interface Prediction {
   class: string;

@@ -422,8 +422,8 @@ The operational release was validated across all functional tiers:
 | **Backend Offline Suite** | `python test_local.py --offline` | **19/19 Checks Passed** | Verified in local environment |
 | **Frontend Production Build** | `npm run build` (Turbopack / Next.js 16) | **0 Errors, 0 Warnings** | Static pages generated successfully |
 | **TypeScript Typecheck** | `tsc` compilation | **0 Type Mismatches** | Fully verified |
-| **Live API Health Check** | `GET https://vriksh.onrender.com/health` | **HTTP 200 OK** | Live on Render cloud |
-| **Live Frontend Interface** | `https://LEAFORA-lilac-three.vercel.app` | **Active & Synced** | Live on Vercel Edge |
+| **Live API Health Check** | `GET https://leafora-3xm6.onrender.com/health` | **HTTP 200 OK** | Live on Render cloud |
+| **Live Frontend Interface** | `https://leafora-one.vercel.app` | **Active & Synced** | Live on Vercel Edge |
 
 ---
 

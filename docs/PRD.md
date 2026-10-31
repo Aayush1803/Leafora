@@ -26,7 +26,7 @@ Global crop production suffers annual losses between 20% and 40% due to plant pe
   * *Result:* 703,603 parameters, 2.8 MB checkpoint, average inference time 45–95ms on commodity single-core CPU.
 * **Objective 3: Accessible, Transparent User Experience**
   * *Target:* Zero-friction web workspace supporting drag-and-drop leaf image uploads, real-time client validation, top-3 probabilistic disease predictions, and clear confidence differentiation.
-  * *Result:* Fully functional Next.js 16 / React 19 web interface deployed on Vercel (`https://LEAFORA-lilac-three.vercel.app`) connecting to a hardened FastAPI microservice on Render (`https://vriksh.onrender.com`).
+  * *Result:* Fully functional Next.js 16 / React 19 web interface deployed on Vercel (`https://leafora-one.vercel.app`) connecting to a hardened FastAPI microservice on Render (`https://leafora-3xm6.onrender.com`).
 
 ---
 
@@ -153,7 +153,7 @@ journey
 4. Modern Next.js 16 / React 19 frontend with drag-and-drop leaf upload.
 5. Probabilistic confidence ranking (Top-3 predictions).
 6. Real-time file validation, error boundaries, and defensive server input filtering.
-7. Deployed production architecture: Render API (`https://vriksh.onrender.com`) and Vercel Client (`https://LEAFORA-lilac-three.vercel.app`).
+7. Deployed production architecture: Render API (`https://leafora-3xm6.onrender.com`) and Vercel Client (`https://leafora-one.vercel.app`).
 
 ### 5.2 Out-of-Scope (Future Enhancements)
 1. **User Authentication & Cloud History:** LEAFORA is strictly designed as an anonymous, friction-free diagnostic utility. No user accounts, passwords, or image histories are maintained.

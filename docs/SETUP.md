@@ -3,8 +3,8 @@
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
 **Audience:** Developers, Evaluators, Maintainers  
-**Live Web Application:** [https://LEAFORA-lilac-three.vercel.app](https://LEAFORA-lilac-three.vercel.app)  
-**Live Backend API (Render):** [https://vriksh.onrender.com](https://vriksh.onrender.com)  
+**Live Web Application:** [https://leafora-one.vercel.app](https://leafora-one.vercel.app)  
+**Live Backend API (Render):** [https://leafora-3xm6.onrender.com](https://leafora-3xm6.onrender.com)  
 
 ---
 
@@ -162,7 +162,7 @@ Create or edit `leafora/.env.local`:
 NEXT_PUBLIC_API_URL=http://localhost:8000
 
 # OR for connecting to live production backend on Render:
-# NEXT_PUBLIC_API_URL=https://vriksh.onrender.com
+# NEXT_PUBLIC_API_URL=https://leafora-3xm6.onrender.com
 ```
 
 ### Step 4.3: Start the Next.js Development Server
@@ -213,6 +213,6 @@ npm run start
 * **Resolution:** Ensure `requirements.txt` includes `--index-url https://download.pytorch.org/whl/cpu` at the top of the file.
 
 ### Issue 4: Render Backend Cold Starts
-* **Symptom:** Initial prediction takes 40+ seconds when connecting to `https://vriksh.onrender.com`.
+* **Symptom:** Initial prediction takes 40+ seconds when connecting to `https://leafora-3xm6.onrender.com`.
 * **Cause:** Render free-tier services spin down after 15 minutes of inactivity.
 * **Resolution:** This is standard serverless cold-start behavior. The frontend displays an alert to notify users that the backend is waking up.

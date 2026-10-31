@@ -4,8 +4,8 @@
 **Date:** October 2026  
 **Frontend Deployment:** Vercel Global Edge Network  
 **Backend Deployment:** Render Cloud Web Service  
-**Production Frontend URL:** `https://LEAFORA-lilac-three.vercel.app`  
-**Production Backend URL:** `https://vriksh.onrender.com`  
+**Production Frontend URL:** `https://leafora-one.vercel.app`  
+**Production Backend URL:** `https://leafora-3xm6.onrender.com`  
 
 ---
 
@@ -15,9 +15,9 @@ LEAFORA adopts a cloud-native, decoupled architecture separating the client-side
 
 ```mermaid
 flowchart TD
-    User["End User / Mobile Farmer"] --> |1. HTTPS Request| VercelEdge["Vercel Global Edge Network<br/>(https://LEAFORA-lilac-three.vercel.app)"]
+    User["End User / Mobile Farmer"] --> |1. HTTPS Request| VercelEdge["Vercel Global Edge Network<br/>(https://leafora-one.vercel.app)"]
     VercelEdge --> |2. Serves Pre-rendered Static Shell| User
-    User --> |3. Uploads Leaf Image<br/>(POST /predict)| RenderLB["Render TLS Reverse Proxy<br/>(https://vriksh.onrender.com)"]
+    User --> |3. Uploads Leaf Image<br/>(POST /predict)| RenderLB["Render TLS Reverse Proxy<br/>(https://leafora-3xm6.onrender.com)"]
     RenderLB --> |4. Forwards Request| Uvicorn["Uvicorn ASGI Container<br/>(Linux Python 3.11)"]
     Uvicorn --> |5. In-Memory Inference| Model["CropDiseaseCNN<br/>(2.8 MB Checkpoint on CPU)"]
     Model --> |6. Top-3 Prediction JSON| Uvicorn
@@ -34,7 +34,7 @@ flowchart TD
 | Setting | Value / Parameter | Notes |
 | :--- | :--- | :--- |
 | **Service Type** | Web Service | Linux native environment |
-| **Repository** | `https://github.com/Aayush1803/Vriksh.git` | Synced to `main` branch |
+| **Repository** | `https://github.com/Aayush1803/Leafora.git` | Synced to `main` branch |
 | **Root Directory** | `.` (Root) or `crop-disease-backend` | Both directories contain full runnable packages |
 | **Environment** | Python 3.11.x | Configured via `.python-version` |
 | **Build Command** | `pip install -r requirements.txt` | Downloads CPU-only PyTorch wheel |
@@ -84,8 +84,8 @@ This pins the build to the lightweight ~180 MB CPU wheel, ensuring fast builds a
 
 | Key | Production Value | Development Value |
 | :--- | :--- | :--- |
-| `NEXT_PUBLIC_API_URL` | `https://vriksh.onrender.com` | `http://localhost:8000` |
-| `NEXT_PUBLIC_APP_URL` | `https://LEAFORA-lilac-three.vercel.app` | `http://localhost:3000` |
+| `NEXT_PUBLIC_API_URL` | `https://leafora-3xm6.onrender.com` | `http://localhost:8000` |
+| `NEXT_PUBLIC_APP_URL` | `https://leafora-one.vercel.app` | `http://localhost:3000` |
 
 ---
 
@@ -95,7 +95,7 @@ This pins the build to the lightweight ~180 MB CPU wheel, ensuring fast builds a
 External uptime monitors (e.g. BetterStack, UptimeRobot) can ping the `/health` endpoint every 5 minutes to keep the Render free-tier container warm:
 
 ```bash
-curl -f https://vriksh.onrender.com/health || exit 1
+curl -f https://leafora-3xm6.onrender.com/health || exit 1
 ```
 
 *Expected Response:*

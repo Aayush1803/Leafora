@@ -8,8 +8,8 @@
 [![Weighted F1: 88.47%](https://img.shields.io/badge/Weighted%20F1-88.47%25-indigo.svg)](./docs/EXPERIMENTS.md)
 [![Parameters: 704K](https://img.shields.io/badge/Parameters-703%2C603%20(2.8%20MB)-orange.svg)](./docs/ARCHITECTURE.md)
 [![Backend: FastAPI](https://img.shields.io/badge/Backend-FastAPI%200.115-009688.svg)](./docs/API.md)
-[![Live Frontend: Vercel](https://img.shields.io/badge/Live%20App-veyra--lilac--three.vercel.app-success.svg)](https://veyra-lilac-three.vercel.app/)
-[![Live API: Render](https://img.shields.io/badge/Live%20API-vriksh.onrender.com-009688.svg)](https://vriksh.onrender.com/health)
+[![Live Frontend: Vercel](https://img.shields.io/badge/Live%20App-leafora--one.vercel.app-success.svg)](https://leafora-one.vercel.app/)
+[![Live API: Render](https://img.shields.io/badge/Live%20API-leafora--3xm6.onrender.com-009688.svg)](https://leafora-3xm6.onrender.com/health)
 
 <br/>
 
@@ -19,7 +19,7 @@
 
 **LEAFORA** is an open-access crop pathology platform that diagnoses foliar diseases across **211 agricultural categories** from standard smartphone leaf photographs.
 
-🚀 **[Open Live Web Application](https://veyra-lilac-three.vercel.app/)** • ⚡ **[Live API Health Check](https://vriksh.onrender.com/health)** • [System Architecture](./docs/ARCHITECTURE.md) • [Model Card](./docs/MODEL_CARD.md) • [Technical Project Report](./docs/REPORT.md)
+🚀 **[Open Live Web Application](https://leafora-one.vercel.app/)** • ⚡ **[Live API Health Check](https://leafora-3xm6.onrender.com/health)** • [System Architecture](./docs/ARCHITECTURE.md) • [Model Card](./docs/MODEL_CARD.md) • [Technical Project Report](./docs/REPORT.md)
 
 </div>
 
@@ -52,8 +52,8 @@ Plant pathogens cause an estimated 20% to 40% loss of global agricultural yield 
 | Layer | Technologies | Deployment Environment |
 | :--- | :--- | :--- |
 | **Machine Learning Core** | PyTorch 2.4.1 (CPU wheel), Torchvision 0.19.1, Pillow 10.4 | In-Memory (Linux container) |
-| **API Microservice** | FastAPI 0.115.5, Uvicorn 0.32.1, Python 3.11 | **Render** (Production: `https://vriksh.onrender.com`) |
-| **Web Frontend** | Next.js 16.3.8 (App Router), React 19, TypeScript, Tailwind CSS, Framer Motion | **Vercel** (Production: `https://veyra-lilac-three.vercel.app`) |
+| **API Microservice** | FastAPI 0.115.5, Uvicorn 0.32.1, Python 3.11 | **Render** (Production: `https://leafora-3xm6.onrender.com`) |
+| **Web Frontend** | Next.js 16.3.8 (App Router), React 19, TypeScript, Tailwind CSS, Framer Motion | **Vercel** (Production: `https://leafora-one.vercel.app`) |
 | **Testing & Verification** | Python `unittest` / `test_local.py`, TypeScript Compiler (`tsc`) | Local & CI Workflows |
 
 ---
@@ -112,8 +112,8 @@ Evaluated on the independent held-out test partition from the harmonized 199,377
 ### 6.2 Backend Setup & Startup
 ```powershell
 # 1. Clone the repository
-git clone https://github.com/Aayush1803/Vriksh.git
-cd Vriksh/crop-disease-backend
+git clone https://github.com/Aayush1803/Leafora.git
+cd Leafora/crop-disease-backend
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
@@ -152,7 +152,7 @@ Open **`http://localhost:3000`** in your browser to access the LEAFORA workspace
 
 ### Liveness Health Check: `GET /health`
 ```bash
-curl -X GET https://vriksh.onrender.com/health
+curl -X GET https://leafora-3xm6.onrender.com/health
 ```
 **Response (`200 OK`):**
 ```json
@@ -167,7 +167,7 @@ curl -X GET https://vriksh.onrender.com/health
 
 ### Crop Disease Prediction: `POST /predict`
 ```bash
-curl -X POST https://vriksh.onrender.com/predict \
+curl -X POST https://leafora-3xm6.onrender.com/predict \
   -F "file=@/path/to/leaf_image.jpg"
 ```
 **Response (`200 OK`):**

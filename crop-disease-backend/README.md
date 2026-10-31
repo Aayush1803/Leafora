@@ -130,8 +130,8 @@ curl -X POST http://localhost:8000/predict \
 ## Deployment Configuration (Render)
 
 The active production backend is deployed as a Web Service on **Render**:
-* **Base Production URL:** `https://vriksh.onrender.com`
-* **Connected Web Frontend:** [https://LEAFORA-lilac-three.vercel.app](https://LEAFORA-lilac-three.vercel.app)
+* **Base Production URL:** `https://leafora-3xm6.onrender.com`
+* **Connected Web Frontend:** [https://leafora-one.vercel.app](https://leafora-one.vercel.app)
 * **Build Command:** `pip install -r requirements.txt`
 * **Start Command (`Procfile`):** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 * **Python Version:** Configured via `.python-version` (Python 3.11)

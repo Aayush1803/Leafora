@@ -3,8 +3,8 @@
 **API Version:** 1.0.0  
 **Base Protocol:** HTTPS / HTTP/1.1  
 **Default Port (Local):** `8000`  
-**Production Host:** `https://vriksh.onrender.com`  
-**Production Frontend Host:** `https://LEAFORA-lilac-three.vercel.app`  
+**Production Host:** `https://leafora-3xm6.onrender.com`  
+**Production Frontend Host:** `https://leafora-one.vercel.app`  
 **Local Development Host:** `http://localhost:8000`  
 **Framework:** FastAPI 0.115 / Uvicorn 0.32 (ASGI)  
 
@@ -126,12 +126,12 @@ The API utilizes standard HTTP status codes and uniform JSON error envelopes (`{
 
 #### Health Check
 ```bash
-curl -X GET https://vriksh.onrender.com/health
+curl -X GET https://leafora-3xm6.onrender.com/health
 ```
 
 #### Prediction Request
 ```bash
-curl -X POST https://vriksh.onrender.com/predict \
+curl -X POST https://leafora-3xm6.onrender.com/predict \
   -F "file=@/path/to/leaf_photo.jpg"
 ```
 
@@ -139,13 +139,13 @@ curl -X POST https://vriksh.onrender.com/predict \
 
 #### Health Check
 ```powershell
-Invoke-RestMethod -Uri "https://vriksh.onrender.com/health" -Method Get
+Invoke-RestMethod -Uri "https://leafora-3xm6.onrender.com/health" -Method Get
 ```
 
 #### Prediction Request
 ```powershell
 Invoke-RestMethod `
-  -Uri "https://vriksh.onrender.com/predict" `
+  -Uri "https://leafora-3xm6.onrender.com/predict" `
   -Method Post `
   -Form @{ file = Get-Item "C:\data\tomato_leaf.jpg" }
 ```
@@ -155,7 +155,7 @@ Invoke-RestMethod `
 ```python
 import requests
 
-url = "https://vriksh.onrender.com/predict"
+url = "https://leafora-3xm6.onrender.com/predict"
 file_path = "sample_leaf.jpg"
 
 with open(file_path, "rb") as f:

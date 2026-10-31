@@ -4,7 +4,7 @@
 **Date:** October 2026  
 **Status:** Approved & Implemented  
 **Core Frameworks:** Next.js 16 (React 19, TypeScript), FastAPI (Python 3.11+), PyTorch (CPU)  
-**Hosting Platforms:** Vercel (Client Edge: `https://LEAFORA-lilac-three.vercel.app`), Render (ASGI Microservice: `https://vriksh.onrender.com`)  
+**Hosting Platforms:** Vercel (Client Edge: `https://leafora-one.vercel.app`), Render (ASGI Microservice: `https://leafora-3xm6.onrender.com`)  
 
 ---
 
@@ -221,12 +221,12 @@ flowchart LR
 
     subgraph VercelEdge ["Vercel Edge Platform"]
         VercelCDN["Vercel Anycast Edge"]
-        VercelFrontend["Next.js Static & SSR Bundles<br/>(Domain: LEAFORA-lilac-three.vercel.app)"]
+        VercelFrontend["Next.js Static & SSR Bundles<br/>(Domain: leafora-one.vercel.app)"]
     end
 
     subgraph RenderPlatform ["Render Cloud (Oregon / Frankfurt)"]
         RenderLB["Render TLS Reverse Proxy"]
-        DockerHost["FastAPI Container<br/>(Domain: vriksh.onrender.com)"]
+        DockerHost["FastAPI Container<br/>(Domain: leafora-3xm6.onrender.com)"]
     end
 
     UserDevice <--> |HTTPS / TLS 1.3| VercelCDN

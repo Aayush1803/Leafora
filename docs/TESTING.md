@@ -86,8 +86,8 @@ npm run build
 | :---: | :--- | :---: | :--- |
 | **TC-24** | Local Live API Server (`GET /health`) | **NOT RUN** | Local FastAPI server was not kept running as a background daemon during this documentation verification phase. |
 | **TC-25** | Local Live API Prediction (`POST /predict`) | **NOT RUN** | Requires live local server running concurrently with a committed test image. |
-| **TC-26** | Remote Render Production Deployment | **PASS** | Live deployment active at `https://vriksh.onrender.com/health` (Render service configured and verified). |
-| **TC-27** | Remote Vercel Production Deployment | **PASS** | Client application active at `https://LEAFORA-lilac-three.vercel.app` connecting to Render backend (`https://vriksh.onrender.com`). |
+| **TC-26** | Remote Render Production Deployment | **PASS** | Live deployment active at `https://leafora-3xm6.onrender.com/health` (Render service configured and verified). |
+| **TC-27** | Remote Vercel Production Deployment | **PASS** | Client application active at `https://leafora-one.vercel.app` connecting to Render backend (`https://leafora-3xm6.onrender.com`). |
 | **TC-28** | Hardware CUDA Acceleration | **NOT RUN** | Host development machine utilizes CPU inference; production cloud runs on CPU. GPU is only required for training. |
 
 ---
