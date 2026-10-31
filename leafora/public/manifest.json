@@ -1,0 +1,22 @@
+{
+  "name": "LEAFORA — Crop Disease Detection",
+  "short_name": "LEAFORA",
+  "description": "Precision crop disease image analysis powered by custom CNN",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F2ED",
+  "theme_color": "#2D6A4F",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+

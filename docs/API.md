@@ -1,10 +1,10 @@
-# VEYRA — REST API Specification
+# LEAFORA — REST API Specification
 
 **API Version:** 1.0.0  
 **Base Protocol:** HTTPS / HTTP/1.1  
 **Default Port (Local):** `8000`  
 **Production Host:** `https://vriksh.onrender.com`  
-**Production Frontend Host:** `https://veyra-lilac-three.vercel.app`  
+**Production Frontend Host:** `https://LEAFORA-lilac-three.vercel.app`  
 **Local Development Host:** `http://localhost:8000`  
 **Framework:** FastAPI 0.115 / Uvicorn 0.32 (ASGI)  
 
@@ -12,7 +12,7 @@
 
 ## 1. Overview & Service Contract
 
-The VEYRA backend provides a lightweight, stateless inference API for automated crop disease classification. All inference operations are executed synchronously on CPU memory without intermediate filesystem persistence.
+The LEAFORA backend provides a lightweight, stateless inference API for automated crop disease classification. All inference operations are executed synchronously on CPU memory without intermediate filesystem persistence.
 
 ### Key Operational Characteristics
 * **Statelessness:** No client sessions, state tokens, or database records are maintained.

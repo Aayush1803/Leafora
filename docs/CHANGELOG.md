@@ -1,6 +1,6 @@
-# VEYRA — Project Changelog
+# LEAFORA — Project Changelog
 
-All notable changes to the **VEYRA** crop disease detection platform are documented in this file based on verifiable repository commits and engineering releases.
+All notable changes to the **LEAFORA** crop disease detection platform are documented in this file based on verifiable repository commits and engineering releases.
 
 ---
 
@@ -29,7 +29,7 @@ All notable changes to the **VEYRA** crop disease detection platform are documen
 ## [1.1.0] - 2026-10-01
 
 ### Added
-* **Next.js 16 Web Application:** Bootstrapped modern React frontend in `veyra/` with drag-and-drop upload workspace and Framer Motion micro-animations.
+* **Next.js 16 Web Application:** Bootstrapped modern React frontend in `LEAFORA/` with drag-and-drop upload workspace and Framer Motion micro-animations.
 * **FastAPI Backend Structure:** Created initial FastAPI inference service with Uvicorn ASGI server and Render deployment configuration (`Procfile`).
 * **Python Runtime Specification:** Added `.python-version` specifying Python 3.11 for Render compatibility.
 

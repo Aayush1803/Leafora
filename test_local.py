@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-test_local.py — Local smoke-test for the VEYRA Crop Disease Detection backend.
+test_local.py — Local smoke-test for the LEAFORA Crop Disease Detection backend.
 
 This file is the ROOT-LEVEL version. The backend lives in crop-disease-backend/
 and deployment reads from the project root via Procfile.
@@ -379,7 +379,7 @@ def test_api(base_url: str, image_path: str | None):
 # ── Entry point ───────────────────────────────────────────────────────────────
 def main():
     parser = argparse.ArgumentParser(
-        description="Local smoke-test for the VEYRA crop-disease API (root-level runner)"
+        description="Local smoke-test for the LEAFORA crop-disease API (root-level runner)"
     )
     parser.add_argument(
         "--offline", action="store_true",
@@ -395,7 +395,7 @@ def main():
     )
     args = parser.parse_args()
 
-    print(f"\n{BOLD}VEYRA Crop Disease Backend — Local Smoke Test (root runner){RESET}")
+    print(f"\n{BOLD}LEAFORA Crop Disease Backend — Local Smoke Test (root runner){RESET}")
     print("=" * 70)
 
     model_ok = test_model_loading()

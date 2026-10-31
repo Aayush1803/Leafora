@@ -1,9 +1,9 @@
-# VEYRA — Local Development & Setup Guide
+# LEAFORA — Local Development & Setup Guide
 
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
 **Audience:** Developers, Evaluators, Maintainers  
-**Live Web Application:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)  
+**Live Web Application:** [https://LEAFORA-lilac-three.vercel.app](https://LEAFORA-lilac-three.vercel.app)  
 **Live Backend API (Render):** [https://vriksh.onrender.com](https://vriksh.onrender.com)  
 
 ---
@@ -42,7 +42,7 @@ HclProject/
 │   ├── requirements.txt           # Backend Python dependencies
 │   ├── test_local.py              # Backend offline/online test suite
 │   └── Procfile                   # Process start command
-├── veyra/                         # Active Next.js 16 frontend
+├── leafora/                         # Active Next.js 16 frontend
 │   ├── app/                       # Next.js App Router (page.tsx, layout.tsx, etc.)
 │   ├── components/                # React UI components (ResultPanel, Navigation, etc.)
 │   ├── lib/                       # API client (api.ts) & utilities
@@ -115,7 +115,7 @@ Confirm that the model weights are located in `models/`:
 * `models/veyra_cnn_best.pth` (2.8 MB)
 * `models/model_config.json` (7.2 KB)
 
-If missing, copy them from `VEYRA_Final-20261020T172259Z-1-001/VEYRA_Final/model/`.
+If missing, copy them from `LEAFORA_Final-20261020T172259Z-1-001/LEAFORA_Final/model/`.
 
 ### Step 3.4: Run the Backend Smoke Test
 
@@ -149,13 +149,13 @@ The frontend is built with Next.js 16 (App Router), React 19, and Tailwind CSS.
 Open a new terminal window:
 
 ```bash
-cd c:\Users\Aayush\OneDrive\HclProject\veyra
+cd c:\Users\Aayush\OneDrive\HclProject\leafora
 npm install
 ```
 
 ### Step 4.2: Configure Environment Variables
 
-Create or edit `veyra/.env.local`:
+Create or edit `leafora/.env.local`:
 
 ```env
 # For connecting to local FastAPI backend:
@@ -171,7 +171,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 npm run dev
 ```
 
-Open your browser at **`http://localhost:3000`**. You will see the VEYRA diagnostic workspace.
+Open your browser at **`http://localhost:3000`**. You will see the LEAFORA diagnostic workspace.
 
 ### Step 4.4: Verify Production Build
 

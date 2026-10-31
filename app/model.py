@@ -2,7 +2,7 @@
 model.py — CropDiseaseCNN architecture.
 
 This definition exactly mirrors the architecture used during training.
-It must stay in sync with the exported VEYRA_Final/inference/veyra_predict.py
+It must stay in sync with the exported LEAFORA_Final/inference/veyra_predict.py
 to ensure checkpoint weights load without shape mismatches.
 
 Architecture summary

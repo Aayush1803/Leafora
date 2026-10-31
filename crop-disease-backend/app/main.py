@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Load model on startup; nothing special needed on shutdown."""
-    logger.info("Application starting up — loading VEYRA model …")
+    logger.info("Application starting up — loading LEAFORA model …")
     try:
         load_model()
         logger.info("Model ready. API is live.")
@@ -53,9 +53,9 @@ async def lifespan(app: FastAPI):
 # FastAPI app
 # ---------------------------------------------------------------------------
 app = FastAPI(
-    title="VEYRA — Crop Disease Detection API",
+    title="LEAFORA — Crop Disease Detection API",
     description=(
-        "Production inference API for VEYRA's custom CropDiseaseCNN, "
+        "Production inference API for LEAFORA's custom CropDiseaseCNN, "
         "trained to classify 211 crop disease categories across multiple crops. "
         "Offline test accuracy: ~87.95% on 19,946 test samples."
     ),

@@ -1,4 +1,4 @@
-# VEYRA — Model Experiments, Training History & Evaluation
+# LEAFORA — Model Experiments, Training History & Evaluation
 
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
@@ -10,7 +10,7 @@
 
 ## 1. Experimental Methodology & Model Evolution
 
-During the VEYRA research cycle, multiple modeling strategies were evaluated to identify the optimal balance between classification capacity, inference latency, memory consumption, and training cost.
+During the LEAFORA research cycle, multiple modeling strategies were evaluated to identify the optimal balance between classification capacity, inference latency, memory consumption, and training cost.
 
 ### 1.1 Architectural Exploration History
 
@@ -18,7 +18,7 @@ During the VEYRA research cycle, multiple modeling strategies were evaluated to 
 | :--- | :---: | :---: | :---: | :--- |
 | **Model 00 (Baseline Color CNN)** | 38 Classes (PlantVillage) | ~4.8 MB | ~99.1% (Lab test set) | **Archived as Rollback Reference.** While accurate in pure studio conditions, 38 classes lacked coverage for real multi-crop farming. Overfit to lab backgrounds. |
 | **Model Candidate: ResNet18** | 211 Classes | 11.2 Million | Not Completed | **Stopped Early.** Massive parameter footprint caused severe training latency on free Colab instances and exceeded target memory ceilings for low-cost cloud deployment. |
-| **Model 01: VEYRA `CropDiseaseCNN`** | **211 Classes** | **703,603 (2.8 MB)** | **87.95% (Held-Out Test)** | **SELECTED AS FINAL RELEASE.** Highly compact, fast CPU inference (45–95ms), robust across 211 categories, achieves 88.47% weighted F1. |
+| **Model 01: LEAFORA `CropDiseaseCNN`** | **211 Classes** | **703,603 (2.8 MB)** | **87.95% (Held-Out Test)** | **SELECTED AS FINAL RELEASE.** Highly compact, fast CPU inference (45–95ms), robust across 211 categories, achieves 88.47% weighted F1. |
 
 ---
 

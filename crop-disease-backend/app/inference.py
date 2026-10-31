@@ -1,5 +1,5 @@
 """
-inference.py — Model loading and image prediction logic for VEYRA.
+inference.py — Model loading and image prediction logic for LEAFORA.
 
 Design decisions
 ----------------
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 _BACKEND_ROOT = Path(__file__).resolve().parent.parent        # crop-disease-backend/
 _MODEL_DIR    = _BACKEND_ROOT / "models"
 
-# VEYRA Final model (211 classes, 2.8 MB)
+# LEAFORA CNN model (211 classes, 2.8 MB)
 _MODEL_PATH  = _MODEL_DIR / "veyra_cnn_best.pth"
 _CONFIG_PATH = _MODEL_DIR / "model_config.json"
 
@@ -79,7 +79,7 @@ def load_model(
     config_path: Path | None = None,
 ) -> CropDiseaseCNN:
     """
-    Load the VEYRA Final CNN from disk and cache it as a module-level singleton.
+    Load the LEAFORA CNN from disk and cache it as a module-level singleton.
     Safe to call multiple times — only loads from disk on the first call.
 
     Parameters
@@ -150,7 +150,7 @@ def load_model(
     _num_classes  = num_classes
 
     logger.info(
-        "VEYRA model loaded — %d classes, running on %s.",
+        "LEAFORA model loaded — %d classes, running on %s.",
         num_classes, _device,
     )
     return _model

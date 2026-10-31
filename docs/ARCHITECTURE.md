@@ -1,16 +1,16 @@
-# VEYRA — System Architecture & Technical Design
+# LEAFORA — System Architecture & Technical Design
 
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
 **Status:** Approved & Implemented  
 **Core Frameworks:** Next.js 16 (React 19, TypeScript), FastAPI (Python 3.11+), PyTorch (CPU)  
-**Hosting Platforms:** Vercel (Client Edge: `https://veyra-lilac-three.vercel.app`), Render (ASGI Microservice: `https://vriksh.onrender.com`)  
+**Hosting Platforms:** Vercel (Client Edge: `https://LEAFORA-lilac-three.vercel.app`), Render (ASGI Microservice: `https://vriksh.onrender.com`)  
 
 ---
 
 ## 1. System Context & Overview
 
-VEYRA is organized as a decoupled, microservice-oriented web platform designed for low-latency agricultural image classification. The architecture strictly delineates presentation, network validation, feature extraction, and classification inference.
+LEAFORA is organized as a decoupled, microservice-oriented web platform designed for low-latency agricultural image classification. The architecture strictly delineates presentation, network validation, feature extraction, and classification inference.
 
 ```mermaid
 flowchart TB
@@ -221,7 +221,7 @@ flowchart LR
 
     subgraph VercelEdge ["Vercel Edge Platform"]
         VercelCDN["Vercel Anycast Edge"]
-        VercelFrontend["Next.js Static & SSR Bundles<br/>(Domain: veyra-lilac-three.vercel.app)"]
+        VercelFrontend["Next.js Static & SSR Bundles<br/>(Domain: LEAFORA-lilac-three.vercel.app)"]
     end
 
     subgraph RenderPlatform ["Render Cloud (Oregon / Frankfurt)"]

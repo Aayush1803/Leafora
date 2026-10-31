@@ -1,4 +1,4 @@
-# VEYRA — Verification, Testing & Quality Assurance
+# LEAFORA — Verification, Testing & Quality Assurance
 
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
@@ -9,7 +9,7 @@
 
 ## 1. Quality Assurance Strategy & Test Matrix
 
-VEYRA utilizes a multi-tiered verification methodology spanning offline model sanity checks, defensive input validation, static TypeScript typechecking, and production frontend bundling.
+LEAFORA utilizes a multi-tiered verification methodology spanning offline model sanity checks, defensive input validation, static TypeScript typechecking, and production frontend bundling.
 
 ```
 +---------------------------------------------------------------------------------+
@@ -65,7 +65,7 @@ python test_local.py --offline
 
 **Command:**
 ```bash
-cd veyra
+cd LEAFORA
 npm run build
 ```
 
@@ -87,7 +87,7 @@ npm run build
 | **TC-24** | Local Live API Server (`GET /health`) | **NOT RUN** | Local FastAPI server was not kept running as a background daemon during this documentation verification phase. |
 | **TC-25** | Local Live API Prediction (`POST /predict`) | **NOT RUN** | Requires live local server running concurrently with a committed test image. |
 | **TC-26** | Remote Render Production Deployment | **PASS** | Live deployment active at `https://vriksh.onrender.com/health` (Render service configured and verified). |
-| **TC-27** | Remote Vercel Production Deployment | **PASS** | Client application active at `https://veyra-lilac-three.vercel.app` connecting to Render backend (`https://vriksh.onrender.com`). |
+| **TC-27** | Remote Vercel Production Deployment | **PASS** | Client application active at `https://LEAFORA-lilac-three.vercel.app` connecting to Render backend (`https://vriksh.onrender.com`). |
 | **TC-28** | Hardware CUDA Acceleration | **NOT RUN** | Host development machine utilizes CPU inference; production cloud runs on CPU. GPU is only required for training. |
 
 ---
@@ -101,7 +101,7 @@ $env:PYTHONIOENCODING="utf-8"
 python test_local.py --offline
 
 # 2. Test Frontend Typecheck and Build
-cd veyra
+cd LEAFORA
 npm run build
 cd ..
 ```

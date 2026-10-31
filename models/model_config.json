@@ -1,5 +1,5 @@
 {
-  "project": "VEYRA",
+  "project": "LEAFORA",
   "architecture": "CropDiseaseCNN",
   "num_classes": 211,
   "input_size": 128,

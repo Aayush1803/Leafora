@@ -1,8 +1,8 @@
-# VEYRA — Comprehensive Technical Project Report
+# LEAFORA — Comprehensive Technical Project Report
 ## Crop Disease Detection Using a Custom Convolutional Neural Network
 
 **Academic Level:** B.Tech Final-Year Capstone Project Report (Computer Science & Engineering — AI & Machine Learning)  
-**Project Identifier:** VEYRA (Visual Evaluation & Yield Risk Assessment)  
+**Project Identifier:** LEAFORA (Visual Evaluation & Yield Risk Assessment)  
 **Academic Year:** 2026  
 **Document Status:** Final Technical Release  
 **Authors / Developers:** Aayush Joshi & Project Team  
@@ -42,7 +42,7 @@
 
 Foliar plant pathologies present one of the most critical threats to global agricultural security, driving estimated annual crop yield losses between 20% and 40%. Conventional identification methods depend on in-person consultations with agronomists or laboratory pathogen culturing—approaches that are prohibitively slow, costly, and inaccessible to smallholder farmers in remote agrarian regions. 
 
-This project presents **VEYRA**, a complete, production-grade agricultural computer vision platform powered by a custom deep Convolutional Neural Network (`CropDiseaseCNN`). Unlike existing baseline solutions that remain constrained to laboratory datasets with uniform backgrounds or deploy bulky 50-million-parameter transfer learning architectures, VEYRA utilizes a custom 4-block CNN containing only **703,603 parameters** (2.8 MB checkpoint size). The model was trained and evaluated on an aggregated multi-source visual corpus of **199,377 manifest samples** across **211 canonical crop disease and healthy-state classes**, incorporating both laboratory-controlled specimens (PlantVillage) and complex in-field photographs (PlantDoc, Agri-Foundation).
+This project presents **LEAFORA**, a complete, production-grade agricultural computer vision platform powered by a custom deep Convolutional Neural Network (`CropDiseaseCNN`). Unlike existing baseline solutions that remain constrained to laboratory datasets with uniform backgrounds or deploy bulky 50-million-parameter transfer learning architectures, LEAFORA utilizes a custom 4-block CNN containing only **703,603 parameters** (2.8 MB checkpoint size). The model was trained and evaluated on an aggregated multi-source visual corpus of **199,377 manifest samples** across **211 canonical crop disease and healthy-state classes**, incorporating both laboratory-controlled specimens (PlantVillage) and complex in-field photographs (PlantDoc, Agri-Foundation).
 
 Evaluated on an independent, held-out test partition of **19,946 samples**, the model achieved an overall classification accuracy of **87.95%**, a weighted F1-score of **88.47%**, a weighted precision of **89.28%**, and a weighted recall of **87.95%**. The system is integrated into an asynchronous, decoupled web architecture comprising a hardened **FastAPI** inference microservice running on CPU-optimized PyTorch and a responsive **Next.js 16 / React 19** frontend deployed on the Vercel Edge. The platform delivers top-3 probabilistic differential diagnoses, visual confidence indicators, and agronomic management strategies in under 100 milliseconds per query, proving that lightweight custom neural networks can deliver practical, high-throughput agricultural decision support on low-cost cloud infrastructure.
 
@@ -57,7 +57,7 @@ The challenge facing modern agriculture is not a lack of scientific treatments, 
 2. By the time an extension officer visits a remote plot, infection has frequently progressed from localized foliar lesions to systemic vascular collapse, rendering interventions ineffective.
 3. Over-application of broad-spectrum fungicides damages soil microbial ecologies and accelerates pathogen resistance.
 
-With the proliferation of high-resolution smartphone cameras in rural areas, computer vision provides an unprecedented opportunity to democratize plant pathology diagnosis. VEYRA was engineered to bridge this divide by delivering an accessible, transparent, and accurate diagnostic pipeline capable of classifying 211 distinct foliar conditions.
+With the proliferation of high-resolution smartphone cameras in rural areas, computer vision provides an unprecedented opportunity to democratize plant pathology diagnosis. LEAFORA was engineered to bridge this divide by delivering an accessible, transparent, and accurate diagnostic pipeline capable of classifying 211 distinct foliar conditions.
 
 ---
 
@@ -87,9 +87,9 @@ Historically, automated agricultural image recognition has fallen into two parad
 * **Heavyweight Pretrained Transfer Learning (2015–Present):** Fine-tuning large-scale classification backbones (ResNet-50, VGG-16, Inception-v3, EfficientNet-B4) originally trained on ImageNet. While achieving high benchmark scores on laboratory datasets, these networks contain 25 to 60+ million parameters. Their massive memory footprint makes them expensive to host on serverless cloud containers, prone to out-of-memory crashes on free tiers, and slow when executed on low-power mobile CPU hardware.
 
 ### 5.2 Motivation for Custom `CropDiseaseCNN`
-Rather than accepting the operational overhead of a 50-million-parameter backbone, VEYRA developed a purpose-built convolutional architecture tailored specifically for $128 \times 128$ botanical leaf images:
+Rather than accepting the operational overhead of a 50-million-parameter backbone, LEAFORA developed a purpose-built convolutional architecture tailored specifically for $128 \times 128$ botanical leaf images:
 * **Tailored Receptive Fields:** Leaf lesions (such as small cercospora spots or mildew patches) are spatially localized. A 4-stage convolutional hierarchy with dual convolutions provides sufficient depth to capture both localized micro-textures and global leaf morphology without excessive parameters.
-* **Extreme Memory Footprint Reduction:** At 703,603 parameters and 2.8 MB disk weight, VEYRA uses **94% fewer parameters** than ResNet-18 (11.2M) and **97% fewer parameters** than ResNet-50 (25.6M).
+* **Extreme Memory Footprint Reduction:** At 703,603 parameters and 2.8 MB disk weight, LEAFORA uses **94% fewer parameters** than ResNet-18 (11.2M) and **97% fewer parameters** than ResNet-50 (25.6M).
 * **Zero-Cost Production Hosting:** The model executes inference in 45–95ms on standard single-core x86 virtual CPUs, enabling stable hosting on zero-cost cloud tiers (Render 512MB RAM) without memory exhaustion.
 
 ---
@@ -152,7 +152,7 @@ flowchart TD
 ## 8. Dataset Provenance, Preparation & Taxonomy
 
 ### 8.1 Data Sources
-VEYRA’s dataset was constructed by synthesizing three open-access plant pathology repositories:
+LEAFORA’s dataset was constructed by synthesizing three open-access plant pathology repositories:
 1. **PlantVillage (Hughes & Salathé, 2015):** Provided high-resolution laboratory photographs of detached leaves across 38 classes and 14 crops. Includes Color, Segmented, and Grayscale image variants.
 2. **PlantDoc (Singh et al., 2020):** Provided complex in-field photographs captured under natural ambient lighting, featuring cluttered backgrounds (soil, weeds, hands, sky) and variable camera perspectives.
 3. **Agri-Foundation-145k:** Provided an extensive agricultural foundation corpus aggregating diverse field pathologies across multiple farming research institutions.
@@ -300,7 +300,7 @@ The backend is built around FastAPI's asynchronous application runner and lifesp
 
 ## 13. Frontend Implementation & User Diagnostic Workflow
 
-The frontend (`veyra/`) provides an intuitive diagnostic interface built with modern web technologies:
+The frontend (`LEAFORA/`) provides an intuitive diagnostic interface built with modern web technologies:
 
 ### 13.1 Key Frontend Features
 * **Drag-and-Drop Ingestion (`UploadWorkspace.tsx`):** Seamless file drop zone with visual drag state, file type filtering, and mobile camera trigger support.
@@ -406,7 +406,7 @@ Inspection of the top-20 confusion matrix confirms strong diagonal dominance ($\
 
 ## 18. Error Analysis & System Limitations
 
-1. **Long-Tail Sensitivity:** For the 44 minority classes, VEYRA cannot currently provide confident primary predictions. Users uploading these rare conditions will typically receive a low confidence score ($< 50\%$).
+1. **Long-Tail Sensitivity:** For the 44 minority classes, LEAFORA cannot currently provide confident primary predictions. Users uploading these rare conditions will typically receive a low confidence score ($< 50\%$).
 2. **Environmental Clutter Bias:** Photographs taken against complex backgrounds (soil, weeds, hands holding the leaf) can exhibit reduced confidence compared to leaves centered on neutral surfaces.
 3. **Closed-World Assumption:** The network maps all inputs onto the 211 output classes. Non-plant images or weeds will be classified into the closest visual leaf class, though typically with low confidence.
 4. **Single Symptom Assumption:** Leaves suffering from concurrent dual infections are categorized solely by the dominant visual symptom.
@@ -423,13 +423,13 @@ The operational release was validated across all functional tiers:
 | **Frontend Production Build** | `npm run build` (Turbopack / Next.js 16) | **0 Errors, 0 Warnings** | Static pages generated successfully |
 | **TypeScript Typecheck** | `tsc` compilation | **0 Type Mismatches** | Fully verified |
 | **Live API Health Check** | `GET https://vriksh.onrender.com/health` | **HTTP 200 OK** | Live on Render cloud |
-| **Live Frontend Interface** | `https://veyra-lilac-three.vercel.app` | **Active & Synced** | Live on Vercel Edge |
+| **Live Frontend Interface** | `https://LEAFORA-lilac-three.vercel.app` | **Active & Synced** | Live on Vercel Edge |
 
 ---
 
 ## 20. Ethical Considerations & Responsible AI
 
-* **Decision Support Disclaimer:** VEYRA is explicitly presented as an educational and diagnostic advisory utility, not a certified agronomic prescription.
+* **Decision Support Disclaimer:** LEAFORA is explicitly presented as an educational and diagnostic advisory utility, not a certified agronomic prescription.
 * **Environmental Safety:** The platform warns farmers against applying restricted chemical pesticides based solely on machine learning predictions without field corroboration.
 * **Data Privacy:** Ingested photographs are processed entirely in memory and discarded immediately, preserving farmer privacy and preventing unauthorized data harvesting.
 
@@ -446,7 +446,7 @@ The operational release was validated across all functional tiers:
 
 ## 22. Conclusion
 
-The VEYRA project demonstrates that high-performance agricultural computer vision does not require massive 50-million-parameter backbones or expensive cloud GPU clusters. By architecting a lightweight 4-block custom CNN containing only 703,603 parameters and training across a harmonized 211-class agricultural manifest of 199,377 samples, VEYRA achieves an overall test accuracy of **87.95%** and a weighted F1-score of **88.47%** on held-out test data. Coupled with a hardened FastAPI backend and a responsive Next.js 16 web interface, VEYRA provides an open, transparent, and edge-ready agricultural diagnostic tool suitable for academic evaluation, field triage, and real-world farm decision support.
+The LEAFORA project demonstrates that high-performance agricultural computer vision does not require massive 50-million-parameter backbones or expensive cloud GPU clusters. By architecting a lightweight 4-block custom CNN containing only 703,603 parameters and training across a harmonized 211-class agricultural manifest of 199,377 samples, LEAFORA achieves an overall test accuracy of **87.95%** and a weighted F1-score of **88.47%** on held-out test data. Coupled with a hardened FastAPI backend and a responsive Next.js 16 web interface, LEAFORA provides an open, transparent, and edge-ready agricultural diagnostic tool suitable for academic evaluation, field triage, and real-world farm decision support.
 
 ---
 

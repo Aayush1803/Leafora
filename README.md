@@ -1,6 +1,6 @@
 <div align="center">
 
-# VEYRA — Crop Disease Detection
+# LEAFORA — Crop Disease Detection
 ### AI-Powered Agricultural Pathogen Diagnosis via a Custom Convolutional Neural Network
 
 [![Model: 211 Classes](https://img.shields.io/badge/Model-211%20Classes-emerald.svg)](./docs/MODEL_CARD.md)
@@ -13,11 +13,11 @@
 
 <br/>
 
-<img src="./docs/assets/veyra_logo.png" alt="VEYRA Logo" width="180" style="border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);" />
+<img src="./docs/assets/leafora_logo.png" alt="LEAFORA Logo" width="180" style="border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);" />
 
 <br/>
 
-**VEYRA** (Visual Evaluation & Yield Risk Assessment) is an open-access crop pathology platform that diagnoses foliar diseases across **211 agricultural categories** from standard smartphone leaf photographs.
+**LEAFORA** is an open-access crop pathology platform that diagnoses foliar diseases across **211 agricultural categories** from standard smartphone leaf photographs.
 
 🚀 **[Open Live Web Application](https://veyra-lilac-three.vercel.app/)** • ⚡ **[Live API Health Check](https://vriksh.onrender.com/health)** • [System Architecture](./docs/ARCHITECTURE.md) • [Model Card](./docs/MODEL_CARD.md) • [Technical Project Report](./docs/REPORT.md)
 
@@ -29,7 +29,7 @@
 
 Plant pathogens cause an estimated 20% to 40% loss of global agricultural yield annually (FAO). In developing agrarian regions, smallholder farmers face severe diagnostic delays due to high laboratory testing costs, geographic isolation, and an extreme shortage of trained agricultural extension officers. Misdiagnosing early fungal blights as bacterial spots often results in wasted chemical expenditure and catastrophic crop failure.
 
-**VEYRA** resolves this diagnostic bottleneck by delivering an edge-efficient, custom-architected Convolutional Neural Network (`CropDiseaseCNN`) that delivers:
+**LEAFORA** resolves this diagnostic bottleneck by delivering an edge-efficient, custom-architected Convolutional Neural Network (`CropDiseaseCNN`) that delivers:
 * **Rapid Differential Diagnosis:** Classifies leaf photographs into top-3 ranked candidate conditions with probabilistic confidence scores in under 100 milliseconds.
 * **Broad Taxonomic Coverage:** Supports 211 distinct disease and healthy categories spanning cereals, solanaceous crops, legumes, fruit orchards, and vegetables.
 * **Actionable Agronomic Guidance:** Provides curated symptom explanations, biological pathogen descriptions, and organic/chemical remediation recommendations directly in the web UI.
@@ -133,7 +133,7 @@ Backend API will be live at: `http://localhost:8000` (Swagger docs at `/docs`).
 ### 6.3 Frontend Setup & Startup
 ```bash
 # 1. Navigate to the frontend directory
-cd ../veyra
+cd ../leafora
 
 # 2. Install Node dependencies
 npm install
@@ -144,7 +144,7 @@ echo "NEXT_PUBLIC_API_URL=http://localhost:8000" > .env.local
 # 4. Start Next.js development server
 npm run dev
 ```
-Open **`http://localhost:3000`** in your browser to access the VEYRA workspace.
+Open **`http://localhost:3000`** in your browser to access the LEAFORA workspace.
 
 ---
 
@@ -200,7 +200,7 @@ HclProject/
 │   ├── requirements.txt           # Production dependencies (CPU-only PyTorch)
 │   ├── Procfile                   # Process start command
 │   └── test_local.py              # Backend offline/online test suite
-├── veyra/                         # Active Next.js 16 frontend
+├── leafora/                       # Active Next.js 16 frontend
 │   ├── app/                       # Next.js App Router (pages: /, /about, /insights)
 │   ├── components/                # UI components (ResultPanel, UploadWorkspace, etc.)
 │   ├── lib/                       # API client (api.ts)
@@ -252,7 +252,7 @@ For exhaustive engineering details, consult the specialized documents inside [`d
 ## 10. Responsible Use & Agricultural Disclaimer
 
 > **⚠️ Advisory Notice:**  
-> VEYRA is an **educational and diagnostic decision-support utility**. It does **NOT** issue certified legal or agricultural chemical prescriptions.
+> LEAFORA is an **educational and diagnostic decision-support utility**. It does **NOT** issue certified legal or agricultural chemical prescriptions.
 > 
 > * **No Automated Chemical Action:** Farmers must never apply restricted systemic agrochemicals solely based on model output without visual corroboration by an agronomist.
 > * **Extension Verification:** For high-risk or quarantine pathogens, confirmation from a local government agricultural extension specialist or university laboratory is strongly recommended.

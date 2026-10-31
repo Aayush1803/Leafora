@@ -1,4 +1,4 @@
-# VEYRA — Dataset Provenance, Methodology & Taxonomy
+# LEAFORA — Dataset Provenance, Methodology & Taxonomy
 
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
@@ -11,7 +11,7 @@
 
 High-accuracy crop pathology detection requires training datasets that reflect both morphological disease symptoms and varied environmental capture conditions. Early agricultural vision systems predominantly relied on the **PlantVillage** dataset, which suffered from severe laboratory background bias (leaves detached and photographed on plain gray sheets). 
 
-VEYRA overcomes this single-source bottleneck by adopting an aggregated, multi-source training methodology combining structured laboratory datasets with uncontrolled, in-field agricultural photography.
+LEAFORA overcomes this single-source bottleneck by adopting an aggregated, multi-source training methodology combining structured laboratory datasets with uncontrolled, in-field agricultural photography.
 
 ```
 +-----------------------------------------------------------------------------------+
@@ -44,7 +44,7 @@ VEYRA overcomes this single-source bottleneck by adopting an aggregated, multi-s
 
 ## 2. Counting Methodology: Reconciling Dataset Figures
 
-In multi-source machine learning projects, confusion often arises when different metrics (raw files, unique leaves, manifest entries) are conflated. VEYRA strictly distinguishes these metrics:
+In multi-source machine learning projects, confusion often arises when different metrics (raw files, unique leaves, manifest entries) are conflated. LEAFORA strictly distinguishes these metrics:
 
 | Entity Type | Numerical Count | Context & Definition |
 | :--- | :---: | :--- |

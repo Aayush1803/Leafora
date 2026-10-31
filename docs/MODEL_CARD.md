@@ -1,11 +1,11 @@
-# VEYRA — Model Card: `CropDiseaseCNN`
+# LEAFORA — Model Card: `CropDiseaseCNN`
 
-**Model Name:** VEYRA `CropDiseaseCNN` (Model 01 — 211-Class Final Release)  
+**Model Name:** LEAFORA `CropDiseaseCNN` (Model 01 — 211-Class Final Release)  
 **Model Version:** 1.0.0-final  
 **Release Date:** October 2026  
 **Model Type:** Custom Deep Convolutional Neural Network for Computer Vision (Single-Label Multi-Class Classification)  
 **Primary Framework:** PyTorch 2.4.1 (CPU / CUDA compatible)  
-**Training Artifacts Source:** `VEYRA_Final-20261020T172259Z-1-001/`  
+**Training Artifacts Source:** `LEAFORA_Final-20261020T172259Z-1-001/`  
 **License:** Open Research & Educational Use  
 
 ---
@@ -169,4 +169,4 @@ The noticeable difference between Macro F1 (44.00%) and Weighted F1 (88.47%) is 
 ### 6.2 Prohibited & Out-of-Scope Interpretations
 * **Sole Justification for Toxic Agrochemical Application:** Users **MUST NOT** apply restricted systemic pesticides or herbicides solely based on model output without visual verification by a certified agronomist.
 * **Human or Animal Health Applications:** This model is strictly trained on botanical foliar diseases and must never be applied to human dermatology or veterinary pathology.
-* **Guaranteed Field Eradication:** VEYRA provides statistical likelihoods, not infallible biological diagnoses.
+* **Guaranteed Field Eradication:** LEAFORA provides statistical likelihoods, not infallible biological diagnoses.

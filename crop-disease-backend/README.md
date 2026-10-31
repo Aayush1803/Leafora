@@ -1,6 +1,6 @@
-# VEYRA — Crop Disease Detection Backend
+# LEAFORA — Crop Disease Detection Backend
 
-Production inference API for **VEYRA's custom `CropDiseaseCNN`**, a PyTorch Convolutional Neural Network trained to classify **211 crop disease categories** across diverse agricultural crops.
+Production inference API for **LEAFORA's custom `CropDiseaseCNN`**, a PyTorch Convolutional Neural Network trained to classify **211 crop disease categories** across diverse agricultural crops.
 
 > **Offline Evaluation Results (Held-Out Test Set, 19,946 Samples):**
 > - **Test Accuracy:** 87.95% (17,543 / 19,946)
@@ -131,7 +131,7 @@ curl -X POST http://localhost:8000/predict \
 
 The active production backend is deployed as a Web Service on **Render**:
 * **Base Production URL:** `https://vriksh.onrender.com`
-* **Connected Web Frontend:** [https://veyra-lilac-three.vercel.app](https://veyra-lilac-three.vercel.app)
+* **Connected Web Frontend:** [https://LEAFORA-lilac-three.vercel.app](https://LEAFORA-lilac-three.vercel.app)
 * **Build Command:** `pip install -r requirements.txt`
 * **Start Command (`Procfile`):** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 * **Python Version:** Configured via `.python-version` (Python 3.11)

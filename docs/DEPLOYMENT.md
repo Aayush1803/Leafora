@@ -1,21 +1,21 @@
-# VEYRA — Cloud Deployment & Production Operations
+# LEAFORA — Cloud Deployment & Production Operations
 
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
 **Frontend Deployment:** Vercel Global Edge Network  
 **Backend Deployment:** Render Cloud Web Service  
-**Production Frontend URL:** `https://veyra-lilac-three.vercel.app`  
+**Production Frontend URL:** `https://LEAFORA-lilac-three.vercel.app`  
 **Production Backend URL:** `https://vriksh.onrender.com`  
 
 ---
 
 ## 1. Production Architecture Overview
 
-VEYRA adopts a cloud-native, decoupled architecture separating the client-side presentation layer from the inference compute layer. This design enables independent scaling, instant global static delivery, and cost-effective compute allocation.
+LEAFORA adopts a cloud-native, decoupled architecture separating the client-side presentation layer from the inference compute layer. This design enables independent scaling, instant global static delivery, and cost-effective compute allocation.
 
 ```mermaid
 flowchart TD
-    User["End User / Mobile Farmer"] --> |1. HTTPS Request| VercelEdge["Vercel Global Edge Network<br/>(https://veyra-lilac-three.vercel.app)"]
+    User["End User / Mobile Farmer"] --> |1. HTTPS Request| VercelEdge["Vercel Global Edge Network<br/>(https://LEAFORA-lilac-three.vercel.app)"]
     VercelEdge --> |2. Serves Pre-rendered Static Shell| User
     User --> |3. Uploads Leaf Image<br/>(POST /predict)| RenderLB["Render TLS Reverse Proxy<br/>(https://vriksh.onrender.com)"]
     RenderLB --> |4. Forwards Request| Uvicorn["Uvicorn ASGI Container<br/>(Linux Python 3.11)"]
@@ -43,7 +43,7 @@ flowchart TD
 | **Auto-Deploy** | Enabled | Triggered on git push to `main` |
 
 ### 2.2 Critical Build Fix: PyTorch CPU Wheels
-Standard PyTorch distributions from PyPI default to CUDA-enabled packages totaling over 2 GB. On Render's 512 MB container build limits, this leads to deployment timeouts. VEYRA's `requirements.txt` specifies:
+Standard PyTorch distributions from PyPI default to CUDA-enabled packages totaling over 2 GB. On Render's 512 MB container build limits, this leads to deployment timeouts. LEAFORA's `requirements.txt` specifies:
 
 ```text
 --extra-index-url https://download.pytorch.org/whl/cpu
@@ -74,7 +74,7 @@ This pins the build to the lightweight ~180 MB CPU wheel, ensuring fast builds a
 | Setting | Value / Parameter | Notes |
 | :--- | :--- | :--- |
 | **Framework Preset** | Next.js | Auto-detected |
-| **Root Directory** | `veyra` | Nested frontend directory |
+| **Root Directory** | `leafora` | Nested frontend directory |
 | **Node.js Version** | 20.x | LTS |
 | **Build Command** | `npm run build` | Turbopack static compilation |
 | **Output Directory** | `.next` | Auto-detected |
@@ -85,7 +85,7 @@ This pins the build to the lightweight ~180 MB CPU wheel, ensuring fast builds a
 | Key | Production Value | Development Value |
 | :--- | :--- | :--- |
 | `NEXT_PUBLIC_API_URL` | `https://vriksh.onrender.com` | `http://localhost:8000` |
-| `NEXT_PUBLIC_APP_URL` | `https://veyra-lilac-three.vercel.app` | `http://localhost:3000` |
+| `NEXT_PUBLIC_APP_URL` | `https://LEAFORA-lilac-three.vercel.app` | `http://localhost:3000` |
 
 ---
 
@@ -106,7 +106,7 @@ curl -f https://vriksh.onrender.com/health || exit 1
 ### 4.2 Free-Tier Sleep Cycle & Mitigation
 Render free instances spin down after 15 minutes of inactivity. When a farmer accesses the portal after a dormant period:
 1. The first request takes 30–50 seconds to complete while the container boots and loads the 2.8 MB PyTorch weights.
-2. VEYRA's frontend detects extended pending states and displays an informational message: *"Backend service is waking up from sleep mode. Please allow up to 45 seconds..."*
+2. LEAFORA's frontend detects extended pending states and displays an informational message: *"Backend service is waking up from sleep mode. Please allow up to 45 seconds..."*
 3. Once awake, subsequent requests process in 60–120ms.
 
 ---

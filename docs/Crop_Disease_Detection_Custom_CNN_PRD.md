@@ -1,7 +1,7 @@
 # Crop Disease Detection Using Custom CNN — Product Requirements Document (PRD)
 
 > **Official Release Notice (v2.0 — October 2026):**  
-> This document has been finalized and integrated into the primary VEYRA documentation suite.  
+> This document has been finalized and integrated into the primary LEAFORA documentation suite.  
 > The canonical and authoritative PRD is maintained at [`docs/PRD.md`](./PRD.md).
 
 ---
@@ -10,7 +10,7 @@
 
 | Attribute | Specification |
 | :--- | :--- |
-| **Project Title** | VEYRA — Crop Disease Detection Using a Custom Convolutional Neural Network |
+| **Project Title** | LEAFORA — Crop Disease Detection Using a Custom Convolutional Neural Network |
 | **Document Version** | 2.0 (Approved Final Release) |
 | **Primary Document** | [`docs/PRD.md`](./PRD.md) |
 | **Model Architecture** | Custom `CropDiseaseCNN` (4 conv blocks, 7 Conv2d layers, 703,603 parameters) |
@@ -18,13 +18,13 @@
 | **Input Format** | RGB, $128 \times 128$, ImageNet Normalization |
 | **Backend Framework** | FastAPI (Python 3.11+, PyTorch CPU) |
 | **Frontend Framework** | Next.js 16 (React 19, TypeScript, Tailwind CSS) |
-| **Status** | Production Deployed (Render API: `https://vriksh.onrender.com` • Vercel Client: `https://veyra-lilac-three.vercel.app`) |
+| **Status** | Production Deployed (Render API: `https://vriksh.onrender.com` • Vercel Client: `https://LEAFORA-lilac-three.vercel.app`) |
 
 ---
 
 ## 1. Executive Summary
 
-VEYRA provides automated plant disease diagnostic intelligence from digital leaf photographs. Rather than relying on heavyweight off-the-shelf classifiers (e.g. ResNet-50, EfficientNet) or restricted commercial APIs, VEYRA implements a custom-designed, parameter-efficient Convolutional Neural Network (`CropDiseaseCNN`) trained from scratch and fine-tuned across an aggregated corpus of agricultural imagery.
+LEAFORA provides automated plant disease diagnostic intelligence from digital leaf photographs. Rather than relying on heavyweight off-the-shelf classifiers (e.g. ResNet-50, EfficientNet) or restricted commercial APIs, LEAFORA implements a custom-designed, parameter-efficient Convolutional Neural Network (`CropDiseaseCNN`) trained from scratch and fine-tuned across an aggregated corpus of agricultural imagery.
 
 The finalized system supports **211 distinct disease and healthy-state classes** across major cereal crops, fruit trees, vegetables, and legumes, returning top-3 probabilistic predictions and actionable agronomic management strategies in under 100 milliseconds on standard CPU hardware.
 

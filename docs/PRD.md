@@ -1,6 +1,6 @@
-# VEYRA — Product Requirements Document (PRD)
+# LEAFORA — Product Requirements Document (PRD)
 
-**Project Title:** VEYRA — Crop Disease Detection Using a Custom Convolutional Neural Network  
+**Project Title:** LEAFORA — Crop Disease Detection Using a Custom Convolutional Neural Network  
 **Document Version:** 2.0 (Final Release)  
 **Date:** October 2026  
 **Status:** Approved & Implemented  
@@ -12,7 +12,7 @@
 ## 1. Executive Summary & Product Vision
 
 ### 1.1 Product Vision
-**VEYRA** (Visual Evaluation & Yield Risk Assessment) is an open-access, AI-powered agricultural diagnostic platform engineered to identify plant pathologies from standard digital leaf photographs. By deploying a custom-architected 211-class Convolutional Neural Network (`CropDiseaseCNN`) trained on a diverse corpus of agricultural imagery, VEYRA provides near-instantaneous disease classification, probabilistic confidence scores, and actionable agronomic remediation guidance to bridge the gap between laboratory computer vision and practical farm-level intervention.
+**LEAFORA** (Visual Evaluation & Yield Risk Assessment) is an open-access, AI-powered agricultural diagnostic platform engineered to identify plant pathologies from standard digital leaf photographs. By deploying a custom-architected 211-class Convolutional Neural Network (`CropDiseaseCNN`) trained on a diverse corpus of agricultural imagery, LEAFORA provides near-instantaneous disease classification, probabilistic confidence scores, and actionable agronomic remediation guidance to bridge the gap between laboratory computer vision and practical farm-level intervention.
 
 ### 1.2 Problem Statement
 Global crop production suffers annual losses between 20% and 40% due to plant pests and pathogens (FAO). For smallholder farmers and agricultural field officers in developing regions, access to certified plant pathologists is severely constrained by cost, geographical remoteness, and laboratory backlogs. While smartphone penetration has expanded rapidly, existing consumer apps frequently rely on closed proprietary models with narrow crop coverage, uncalibrated confidence scores, or opaque classification pipelines that fail under varying field conditions.
@@ -26,7 +26,7 @@ Global crop production suffers annual losses between 20% and 40% due to plant pe
   * *Result:* 703,603 parameters, 2.8 MB checkpoint, average inference time 45–95ms on commodity single-core CPU.
 * **Objective 3: Accessible, Transparent User Experience**
   * *Target:* Zero-friction web workspace supporting drag-and-drop leaf image uploads, real-time client validation, top-3 probabilistic disease predictions, and clear confidence differentiation.
-  * *Result:* Fully functional Next.js 16 / React 19 web interface deployed on Vercel (`https://veyra-lilac-three.vercel.app`) connecting to a hardened FastAPI microservice on Render (`https://vriksh.onrender.com`).
+  * *Result:* Fully functional Next.js 16 / React 19 web interface deployed on Vercel (`https://LEAFORA-lilac-three.vercel.app`) connecting to a hardened FastAPI microservice on Render (`https://vriksh.onrender.com`).
 
 ---
 
@@ -48,15 +48,15 @@ journey
     section Field Capture
       Notices brown spots on tomato leaves: 3: Ramesh
       Takes clear smartphone photo of infected leaf: 4: Ramesh
-    section VEYRA Web Portal
-      Navigates to VEYRA web workspace: 5: Ramesh
+    section LEAFORA Web Portal
+      Navigates to LEAFORA web workspace: 5: Ramesh
       Drags photo into upload dropzone: 5: Ramesh
-      Client verifies JPEG format and <10MB size: 5: VEYRA
+      Client verifies JPEG format and <10MB size: 5: LEAFORA
     section Processing & Analysis
-      Image transmitted over HTTPS to FastAPI endpoint: 5: VEYRA
-      Backend normalizes image to 128x128 RGB tensor: 5: VEYRA
-      CropDiseaseCNN computes 211 logits in 65ms: 5: VEYRA
-      Softmax extracts Top-3 class probabilities: 5: VEYRA
+      Image transmitted over HTTPS to FastAPI endpoint: 5: LEAFORA
+      Backend normalizes image to 128x128 RGB tensor: 5: LEAFORA
+      CropDiseaseCNN computes 211 logits in 65ms: 5: LEAFORA
+      Softmax extracts Top-3 class probabilities: 5: LEAFORA
     section Decision Support
       Results panel highlights Top Prediction with 98.1% confidence: 5: Ramesh
       Reads symptom description and organic fungicide guidance: 5: Ramesh
@@ -153,10 +153,10 @@ journey
 4. Modern Next.js 16 / React 19 frontend with drag-and-drop leaf upload.
 5. Probabilistic confidence ranking (Top-3 predictions).
 6. Real-time file validation, error boundaries, and defensive server input filtering.
-7. Deployed production architecture: Render API (`https://vriksh.onrender.com`) and Vercel Client (`https://veyra-lilac-three.vercel.app`).
+7. Deployed production architecture: Render API (`https://vriksh.onrender.com`) and Vercel Client (`https://LEAFORA-lilac-three.vercel.app`).
 
 ### 5.2 Out-of-Scope (Future Enhancements)
-1. **User Authentication & Cloud History:** VEYRA is strictly designed as an anonymous, friction-free diagnostic utility. No user accounts, passwords, or image histories are maintained.
+1. **User Authentication & Cloud History:** LEAFORA is strictly designed as an anonymous, friction-free diagnostic utility. No user accounts, passwords, or image histories are maintained.
 2. **Automated Agrochemical E-Commerce:** The platform does not sell or endorse commercial chemical brands.
 3. **Automated Hardware Actuation:** Direct integration with drone sprayers or automated tractor booms is excluded from this software release.
 4. **Soil & Climate Sensor Ingestion:** The current release operates strictly on visual RGB leaf symptom evidence.
